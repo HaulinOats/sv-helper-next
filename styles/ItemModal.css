@@ -1,0 +1,173 @@
+.ItemModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+.ItemModal-main {
+  position: absolute;
+  top: 7%;
+  left: 6%;
+  width: 88%;
+  height: 88%;
+  border-radius: 3px;
+  padding: 10px;
+  background: darkslategray;
+  overflow-y: auto;
+  border-radius: 7px;
+  border: 7px ridge;
+  border-color: tan;
+}
+.ItemModal-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.6rem;
+  padding: 0 10px;
+  cursor: pointer;
+}
+.ItemModal-delete-item {
+  border-radius: 5px;
+  background: crimson;
+  color: white;
+}
+.ItemModal table tbody {
+  background: rgba(255, 255, 255, 0.7);
+  color: black;
+}
+.ItemModal table tbody td {
+  vertical-align: middle;
+}
+.ItemModal-main-icon-container {
+  position: relative;
+}
+.ItemModal-main-icon-container img {
+  filter: drop-shadow(-2px 4px 1px #666666);
+}
+.ItemModal h2 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-shadow: 0px 1px 2px white;
+  margin: 0;
+}
+.ItemModal-name-quality-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 17px;
+  width: 0;
+  height: 0;
+  z-index: 2;
+  -webkit-text-stroke: black;
+  -webkit-text-stroke-width: 0.03rem;
+}
+.ItemModal-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ItemModal-title-container a {
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.ItemModal-title-container span {
+  display: flex;
+  align-items: center;
+}
+.ItemModal-status-icon {
+  width: 25px;
+  margin-left: 5px;
+}
+.ItemModal-status-greenhouse-icon {
+}
+.ItemModal a {
+  color: maroon;
+}
+.ItemModal-table-col-2 {
+  width: 41%;
+}
+.ItemModal-clickguard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.ItemModal-close-btn {
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  top: -16px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 3rem;
+  width: 25px;
+  height: 45px;
+  padding-left: 5px;
+}
+.ItemModal-table {
+  font-size: 0.8rem;
+  color: white;
+  margin-top: 10px;
+}
+.ItemModal-table i {
+  color: grey;
+}
+.ItemModal-table a {
+  text-decoration: none;
+}
+.ItemModal-table td {
+  width: 35%;
+}
+/* .ItemModal-table */
+.ItemModal-item-icon,
+.ItemModal-perks-icon,
+.ItemModal-seed-icon {
+  width: 22px;
+  margin-right: 4px;
+}
+.ItemModal-artisan-equipment-icon {
+  height: 28px;
+  margin-right: 6px;
+}
+.ItemModal-perks-text {
+  font-size: 0.7rem;
+}
+.ItemModal-seed-vendor-icon {
+  width: 20px;
+}
+.ItemModal-gold-icon {
+  width: 15px;
+  margin-right: 3px;
+}
+.ItemModal-season-icon {
+  width: 20px;
+  margin-right: 4px;
+}
+.ItemModal-planting-day {
+  text-transform: capitalize;
+}
+.ItemModal-crop-price-icon-container {
+  display: inline-block;
+  position: relative;
+}
+.ItemModal-crop-price-icon {
+}
+.ItemModal-crop-price-star {
+  font-size: 1rem;
+}
+.ItemModal-crop-price-star-normal {
+}
+.ItemModal-icon {
+  width: 25px;
+  margin-right: 4px;
+}
+.ItemModal-gold-per-day-container {
+  background: goldenrod;
+  font-weight: bold;
+  font-size: 1.2rem;
+}

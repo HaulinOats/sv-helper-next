@@ -1,0 +1,123 @@
+.CropDetail {
+  position:relative;
+  padding:7px;
+  margin-bottom:4px;
+  border-radius: 5px;
+  border: solid 3px brown;
+  cursor:pointer;
+  user-select:none;
+}
+.CropDetail-name-icon-container {
+  display:flex;
+  align-items: center;
+}
+.CropDetail-top-name-level-container {
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.CropDetail-main-icon {
+  width:40px;
+  margin-right:4px;
+  filter: drop-shadow(-2px 4px 1px #666666);
+}
+.CropDetail-main-title {
+  font-size: 1.5rem;
+  line-height: 1;
+  text-shadow: 2px 2px 3px black;
+  color: white;
+}
+.CropDetail-top-name-level-container a {
+  display:flex;
+  align-items: center;
+  text-decoration: none;
+}
+.CropDetail-status-icon {
+  width:22px;
+  margin-left:5px;
+}
+.CropDetail-status-greenhouse-icon {
+  width:25px;
+}
+.CropDetail-perks-level-container {
+  display: inline-block;
+  font-size: 0.8rem;
+  min-width: 115px;
+  background: rgb(245 222 179 / 40%);
+  padding:3px;
+  box-shadow: -2px 2px 4px -2px black;
+}
+.CropDetail-perks-level-farming{
+  display: flex;
+  justify-content: space-between;
+  border-bottom:dotted 1px black;
+}
+.CropDetail-main-container {
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  
+}
+.CropDetail-main-container-left {
+  background: rgb(255 255 255 / 45%);
+  /* width:55%; */
+  margin-right: 1%;
+  padding:5px;
+  box-shadow: -2px 2px 4px -2px black;
+  flex-grow:1;
+}
+.CropDetail-season-container {
+  text-transform: capitalize;
+}
+.CropDetail-main-container-middle {
+  background: rgb(255 255 255 / 45%);
+  /* width:55%; */
+  margin: 0;
+  padding:5px;
+  box-shadow: -2px 2px 4px -2px black;
+  flex-grow:1;
+}
+.CropDetail-main-container-right {
+  background: rgb(255 255 255 / 45%);
+  position: relative;
+  /* width:43%; */
+  margin-left: 1%;
+  padding:5px;
+  box-shadow: -2px 2px 4px -2px black;
+  flex-grow:1;
+}
+.CropDetail-season {
+  text-transform: capitalize;
+}
+.CropDetail-bottom-container-row {
+  border-bottom:dotted 1px black;
+  font-size:0.7rem;
+}
+.CropDetail-bottom-container-row span {
+  vertical-align:middle;
+}
+.CropDetail-bottom-container-row img{
+  width:15px;
+  margin-right:3px;
+}
+.CropDetail-gold-per-day {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 0;
+  left:0;
+  width: 100%;
+  font-weight: bold;
+  align-items: center;
+  background: goldenrod;
+  padding: 1px 2px;
+}
+.CropDetail-daily-gold-icon {
+  width:15px;
+}
+.CropDetail-gold-per-day-total {
+  font-size:.8rem;
+}

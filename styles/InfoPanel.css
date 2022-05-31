@@ -1,0 +1,54 @@
+.InfoPanel {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index: 7;
+}
+.InfoPanel p {
+  margin-bottom:15px;
+  font-size:.8rem;
+}
+.InfoPanel a {
+  color:white;
+}
+.InfoPanel-clickguard {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.6);
+}
+.InfoPanel-main {
+  position: absolute;
+  top:5%;
+  left:6%;
+  width:88%;
+  padding:2%;
+  background:darkcyan;
+  border-radius: 5px;
+  border: 7px ridge;
+  border-color: tan;
+}
+.InfoPanel-close-btn {
+  position: absolute;
+  font-size: 3rem;
+  top: -20px;
+  right: 3px;
+  cursor: pointer;
+}
+.InfoPanel-heading {
+  border-bottom:solid 2px black;
+
+}
+.InfoPanel-helper {
+  display:block;
+}
+.InfoPanel-helper img{
+  width:100%;
+  max-width: 550px;
+  display:block;
+  margin:0 auto;
+}

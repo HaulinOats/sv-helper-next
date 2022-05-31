@@ -1,0 +1,175 @@
+.home {
+  padding-top: 12px;
+}
+.home-no-items {
+  background: burlywood;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+  border: 7px ridge;
+  border-color: tan;
+}
+.home-no-items p {
+  margin: 10px 0;
+  line-height: 1.3;
+}
+.home a:visited {
+  color: default;
+}
+.more-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: darkcyan;
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.home-top-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+}
+.home-top-container-first {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  box-shadow: 1px 1px 3px black;
+}
+.home-add-item-btn {
+  height: fit-content;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px black;
+  color: antiquewhite;
+  background: darkslategray;
+  border: none;
+}
+.home-add-item-btn:active {
+  box-shadow: none;
+}
+h1 {
+  font-family: Helvetica;
+  font-size: 1rem;
+  margin: 0;
+  color: darkcyan;
+  text-shadow: 1px 1px 0px black;
+  cursor: pointer;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+h1 i {
+  display: block;
+}
+.home-title-second {
+  letter-spacing: 5.3px;
+}
+.home-title-third {
+  letter-spacing: 4.3px;
+}
+.home-normal-color {
+  visibility: hidden;
+}
+.home-silver-color {
+  color: silver;
+}
+.home-gold-color {
+  color: gold;
+}
+.home-iridium-color {
+  color: fuchsia;
+}
+.home-delete-all {
+  background: indianred;
+  color: white;
+}
+.home-delete-all-icon {
+  width: 15px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+.home-perks-level-container {
+  display: inline-block;
+  font-size: 0.7rem;
+  min-width: 115px;
+  background: rgb(245 222 179 / 40%);
+  padding: 3px;
+  box-shadow: -2px 2px 4px -2px black;
+  cursor: pointer;
+}
+.home-perks-level-farming {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: dotted 1px black;
+}
+.home-delete-item {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  color: red;
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom-left-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Slider/Toggle CSS */
+.home-slider-container {
+  display: flex;
+  align-items: center;
+}
+.home-slider-inner {
+  display: inline-block;
+  height: 30px;
+  width: 50px;
+  margin-right: 8px;
+}
+.home-slider-container .switch {
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  width: 50px;
+}
+.home-slider-container .switch input {
+  display: none;
+}
+.home-slider-container .slider {
+  background-color: brown;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+.home-slider-container .slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 22px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 22px;
+}
+.home-slider-container input:checked + .slider {
+  background-color: #3d9cdc;
+}
+.home-slider-container input:checked + .slider:before {
+  transform: translateX(21px);
+}
+.home-slider-container .slider.round {
+  border-radius: 34px;
+}
+.home-slider-container .slider.round:before {
+  border-radius: 50%;
+}

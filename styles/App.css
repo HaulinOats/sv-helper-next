@@ -1,0 +1,178 @@
+.App {
+  padding-top: 12px;
+  background: no-repeat fixed center center / cover;
+  height: 100vh;
+  width: 100vw;
+}
+.App-no-items {
+  background: burlywood;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 15px;
+  border: 7px ridge;
+  border-color: tan;
+}
+.App-no-items p {
+  margin: 10px 0;
+  line-height: 1.3;
+}
+.App a:visited {
+  color: default;
+}
+.more-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: darkcyan;
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.App-top-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+}
+.App-top-container-first {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  box-shadow: 1px 1px 3px black;
+}
+.App-add-item-btn {
+  height: fit-content;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px black;
+  color: antiquewhite;
+  background: darkslategray;
+  border: none;
+}
+.App-add-item-btn:active {
+  box-shadow: none;
+}
+h1 {
+  font-family: Helvetica;
+  font-size: 1rem;
+  margin: 0;
+  color: darkcyan;
+  text-shadow: 1px 1px 0px black;
+  cursor: pointer;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+h1 i {
+  display: block;
+}
+.App-title-second {
+  letter-spacing: 5.3px;
+}
+.App-title-third {
+  letter-spacing: 4.3px;
+}
+.App-normal-color {
+  visibility: hidden;
+}
+.App-silver-color {
+  color: silver;
+}
+.App-gold-color {
+  color: gold;
+}
+.App-iridium-color {
+  color: fuchsia;
+}
+.App-delete-all {
+  background: indianred;
+  color: white;
+}
+.App-delete-all-icon {
+  width: 15px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+}
+.App-perks-level-container {
+  display: inline-block;
+  font-size: 0.7rem;
+  min-width: 115px;
+  background: rgb(245 222 179 / 40%);
+  padding: 3px;
+  box-shadow: -2px 2px 4px -2px black;
+  cursor: pointer;
+}
+.App-perks-level-farming {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: dotted 1px black;
+}
+.App-delete-item {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  color: red;
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom-left-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Slider/Toggle CSS */
+.App-slider-container {
+  display: flex;
+  align-items: center;
+}
+.App-slider-inner {
+  display: inline-block;
+  height: 30px;
+  width: 50px;
+  margin-right: 8px;
+}
+.App-slider-container .switch {
+  display: inline-block;
+  height: 30px;
+  position: relative;
+  width: 50px;
+}
+.App-slider-container .switch input {
+  display: none;
+}
+.App-slider-container .slider {
+  background-color: brown;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+.App-slider-container .slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 22px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 22px;
+}
+.App-slider-container input:checked + .slider {
+  background-color: #3d9cdc;
+}
+.App-slider-container input:checked + .slider:before {
+  transform: translateX(21px);
+}
+.App-slider-container .slider.round {
+  border-radius: 34px;
+}
+.App-slider-container .slider.round:before {
+  border-radius: 50%;
+}
