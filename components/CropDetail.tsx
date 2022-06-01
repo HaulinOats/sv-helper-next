@@ -1,7 +1,6 @@
 import React, { FC, useContext } from "react";
 import { ItemContext } from "../pages/_app";
 import { CropCalculationItem } from "../types/CropCalculationItem.type";
-import { ItemRef } from "../types/ItemRef.type";
 import { seasonIcons } from "../util/helpers";
 
 interface CropDetailProps {
@@ -14,6 +13,8 @@ const CropDetail: FC<CropDetailProps> = (props) => {
   const itemContext = useContext(ItemContext);
 
   let itemRefObj = itemContext.itemRef[props.item.itemId];
+
+  console.log(props.item);
 
   return (
     <div

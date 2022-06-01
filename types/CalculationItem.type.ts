@@ -1,31 +1,18 @@
-export interface CalculationItem {
-  [key: string]: number | string | boolean | undefined;
-  addedAt: number;
-  avgGoldPerDay: number;
-  customSellPrice: number;
-  displayCategory: string;
-  foodFarmingBuff: number;
-  itemId: string;
-  isCustom: boolean;
-  name: string;
-  sellPrice: number;
-  quality: string;
-  isCask: boolean;
-  cropId?: string;
-  // processingTime?: number;
-  // ingredientId?: string;
-  // quality?: string;
-  // priceMultiplier?: number;
-  // perkSellPriceMultiplier?: number;
-  // processingTimeInDays?: number;
-  // processingTimeInDaysModified?: number;
-  // basePrice?: number;
-  // normalSellPrice?: number;
-  // baseSellPricePerHarvest?: number;
-  // farmingLevelAvgPriceMultiplier?: number;
-  // sellPricePerHarvestRounded?: number;
-  // cropId?: string;
-  // startQuality: string;
-  // quantity?: number;
-  // eggQuality?: string;
-}
+import { BaseCalculationItem } from "./BaseCalculationItem.type";
+import { CheeseCalculationItem } from "./CheeseCalculationItem.type";
+import { CropCalculationItem } from "./CropCalculationItem.type";
+import { GoodCalculationItem } from "./GoodCalculationItem";
+import { MayoCalculationItem } from "./MayoCalculationItem";
+import { OilCalculationItem } from "./OilCalculationItem.type";
+import { PreserveCalculationItem } from "./PreserveCalculationItem";
+import { WineJuiceCalculationItem } from "./WineJuiceCalculationItem.type";
+
+export type CalculationItem =
+  | BaseCalculationItem
+  | CropCalculationItem
+  | WineJuiceCalculationItem
+  | PreserveCalculationItem
+  | GoodCalculationItem
+  | CheeseCalculationItem
+  | MayoCalculationItem
+  | OilCalculationItem;

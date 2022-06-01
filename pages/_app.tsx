@@ -14,16 +14,16 @@ import "../styles/Tooltip.css";
 
 import type { AppProps } from "next/app";
 import Script from "next/script";
-import { createContext } from "react";
 import { ItemRef } from "../types/ItemRef.type";
 import { ItemData } from "../types/ItemData.type";
 import createItemObjects from "../util/item";
+import React from "react";
 
 //itemRef is a key/value store for every single item in the dataset. The key is the item's id.
 //itemData is the dataset sorted into categories
 const { itemRef, itemData }: { itemRef: ItemRef; itemData: ItemData } =
   createItemObjects();
-export const ItemContext = createContext({ itemRef, itemData });
+export const ItemContext = React.createContext({ itemRef, itemData });
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

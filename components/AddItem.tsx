@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, KeyboardEvent, useContext, useState } from "react";
 import LevelPerksSelection from "./LevelPerksSelection";
 import { Food } from "../types/Food.type";
 import {
@@ -76,10 +70,6 @@ const AddItem: React.FC<Props> = (props: Props) => {
   );
   const [isCustom, setIsCustom] = useState(false);
   const [customSellPrice, setCustomSellPrice] = useState(1);
-
-  useEffect(() => {
-    console.log(props.addItemPanelIsShowing);
-  });
 
   const selectInput = (e: Event) => {
     (e.target as HTMLInputElement).select();

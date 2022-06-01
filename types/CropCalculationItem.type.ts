@@ -1,6 +1,6 @@
-import { CalculationItem } from "./CalculationItem.type";
+import { BaseCalculationItem } from "./BaseCalculationItem.type";
 
-export interface CropCalculationItem extends CalculationItem {
+export interface CropCalculationItem extends BaseCalculationItem {
   fertilizerId: string | undefined;
   seasonStartIdx: number;
   foodId: string | undefined;
@@ -10,9 +10,11 @@ export interface CropCalculationItem extends CalculationItem {
   seedId: string;
   fertilizerCost: number;
   growTimeMultiplier: number;
+  maturityDaysModified: number;
   maturityDaysModifiedRounded: number;
   regrowthDaysModifiedRounded: number;
   harvestDays: number;
+  maxHarvests: number;
   maxHarvestsRounded: number;
   sellPricePerHarvest: number;
   maxHarvestDays: number;
@@ -22,4 +24,7 @@ export interface CropCalculationItem extends CalculationItem {
   baseSellPricePerHarvest: number;
   farmingLevelAvgPriceMultiplier: number;
   sellPricePerHarvestRounded: number;
+  foodFarmingBuff: number;
+  initialGrowTimeMultiplier: number;
+  regrowthGrowTimeMultiplier: number;
 }

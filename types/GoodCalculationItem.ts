@@ -1,6 +1,6 @@
-import { CalculationItem } from "./CalculationItem.type";
+import { BaseCalculationItem } from "./BaseCalculationItem.type";
 
-export interface GoodCalculationItem extends CalculationItem {
+export interface GoodCalculationItem extends BaseCalculationItem {
   ingredientId: string;
   processingTimeInDays: number;
   basePrice: number;

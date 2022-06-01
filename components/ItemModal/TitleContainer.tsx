@@ -1,10 +1,9 @@
 import { useContext } from "react";
 import { ItemContext } from "../../pages/_app";
-import { CropCalculationItem } from "../../types/CropCalculationItem.type";
-import { GoodCalculationItem } from "../../types/GoodCalculationItem";
+import { CalculationItem } from "../../types/CalculationItem.type";
 
 interface TitleContainerProps {
-  item: CropCalculationItem | GoodCalculationItem;
+  item: CalculationItem;
 }
 
 const App: React.FC<TitleContainerProps> = (props) => {

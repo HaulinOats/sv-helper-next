@@ -1,4 +1,5 @@
 import React, { FC, useContext } from "react";
+import { CalculationItem } from "../../types/CalculationItem.type";
 import { CropCalculationItem } from "../../types/CropCalculationItem.type";
 import { GoodCalculationItem } from "../../types/GoodCalculationItem";
 import CropTable from "./CropTable";
@@ -7,7 +8,7 @@ import TitleContainer from "./TitleContainer";
 
 interface ItemModalProps {
   closeModal: () => void;
-  item: CropCalculationItem | GoodCalculationItem;
+  item: CalculationItem;
   itemIdx: number;
   deleteItem: (idx: number) => void;
 }
