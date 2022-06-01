@@ -183,7 +183,7 @@ const Home: NextPage = () => {
     setAppState({
       ...appState,
       selectedItemsArr: tempSelectedItemsArr,
-      addItemPanelIsShowing: hideAddItemPanel,
+      addItemPanelIsShowing: hideAddItemPanel ? hideAddItemPanel : false,
     });
   };
 
@@ -253,7 +253,7 @@ const Home: NextPage = () => {
   const addItem = (item: CalculationItem) => {
     let itemsArr = appState.selectedItemsArr;
     itemsArr.push(item);
-    updateCalculationsAndSort(itemsArr, false);
+    updateCalculationsAndSort(itemsArr);
   };
 
   return (

@@ -14,8 +14,6 @@ const CropDetail: FC<CropDetailProps> = (props) => {
 
   let itemRefObj = itemContext.itemRef[props.item.itemId];
 
-  console.log(props.item);
-
   return (
     <div
       className="CropDetail"

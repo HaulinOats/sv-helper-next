@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { PerksContext } from "../../pages";
 import { ItemContext } from "../../pages/_app";
 import { CropCalculationItem } from "../../types/CropCalculationItem.type";
 import { seasonIcons } from "../../util/helpers";
@@ -9,6 +10,7 @@ interface CropTableProps {
 
 const CropTable: React.FC<CropTableProps> = (props) => {
   const itemContext = useContext(ItemContext);
+  const perksContext = useContext(PerksContext);
   let itemRefObj = itemContext.itemRef[props.item.itemId];
   return (
     <tbody>
@@ -17,7 +19,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
           <span>Farming Level:</span>
         </td>
         <td>
-          <span>{props.item.farmingLevel}</span>
+          <span>{perksContext.farmingLevel}</span>
         </td>
       </tr>
       <tr>
@@ -54,7 +56,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
         </td>
         <td>
           <span>
-            {(props.item.farmingLevel as number) + props.item.foodFarmingBuff}
+            {(perksContext.farmingLevel as number) + props.item.foodFarmingBuff}
           </span>
         </td>
       </tr>
