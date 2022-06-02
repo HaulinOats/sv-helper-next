@@ -81,9 +81,7 @@ const Home: NextPage = () => {
 
     setAppState({
       ...appState,
-      selectedItemsArr: !purgeData
-        ? getItemFromStorage("selectedItems")
-        : [] || appState.selectedItemsArr,
+      selectedItemsArr: !purgeData ? getItemFromStorage("selectedItems") : [],
       sortByField: getItemFromStorage("sortByField") || appState.sortByField,
       farmingLevel: getItemFromStorage("farmingLevel") || appState.farmingLevel,
       hasTiller: getItemFromStorage("hasTiller") || appState.hasTiller,
