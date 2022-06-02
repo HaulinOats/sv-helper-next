@@ -6,6 +6,6 @@ export const getItemFromStorage = (key: string) => {
       return localStorage.getItem(key);
     }
   } else {
-    return false;
+    return undefined;
   }
 };
