@@ -64,24 +64,25 @@ const Home: NextPage = () => {
     //check if dataVersion variables match, if not, purge stored items
     //change this value when needing to purge items from storage
     //should only need to change when major changes to dataset occur
-    let dataVersion = 1;
-    let purgeData = false;
-    if (localStorage.getItem("dataVersion")) {
-      if (
-        JSON.parse(localStorage.getItem("dataVersion") as string) !==
-        dataVersion
-      ) {
-        purgeData = true;
-        localStorage.setItem("dataVersion", String(dataVersion));
-      }
-    } else {
-      localStorage.setItem("dataVersion", String(dataVersion));
-      purgeData = true;
-    }
+    // let dataVersion = 1;
+    // let purgeData = false;
+    // if (localStorage.getItem("dataVersion")) {
+    //   if (
+    //     JSON.parse(localStorage.getItem("dataVersion") as string) !==
+    //     dataVersion
+    //   ) {
+    //     purgeData = true;
+    //     localStorage.setItem("dataVersion", String(dataVersion));
+    //   }
+    // } else {
+    //   localStorage.setItem("dataVersion", String(dataVersion));
+    //   purgeData = true;
+    // }
 
     setAppState({
       ...appState,
-      selectedItemsArr: !purgeData ? getItemFromStorage("selectedItems") : [],
+      selectedItemsArr:
+        getItemFromStorage("selectedItems") || appState.selectedItemsArr,
       sortByField: getItemFromStorage("sortByField") || appState.sortByField,
       farmingLevel: getItemFromStorage("farmingLevel") || appState.farmingLevel,
       hasTiller: getItemFromStorage("hasTiller") || appState.hasTiller,
