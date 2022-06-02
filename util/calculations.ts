@@ -1,10 +1,8 @@
-import { useContext } from "react";
-import { PerksContext } from "../pages";
-import soilModifiers from "../public/soil-modifiers";
+import soilModifiers from "../public/soil-modifiers.json";
+import { AppState } from "../types/AppState.type";
 import { CheeseCalculationItem } from "../types/CheeseCalculationItem.type";
 import { CropCalculationItem } from "../types/CropCalculationItem.type";
 import { GoodCalculationItem } from "../types/GoodCalculationItem";
-import { ItemData } from "../types/ItemData.type";
 import { ItemRef } from "../types/ItemRef.type";
 import { MayoCalculationItem } from "../types/MayoCalculationItem";
 import { OilCalculationItem } from "../types/OilCalculationItem.type";
@@ -16,9 +14,7 @@ const { itemRef }: { itemRef: ItemRef } = createItemObjects();
 
 export const getCropCalculations = (
   item: CropCalculationItem,
-  farmingLevel: number,
-  hasTiller: boolean,
-  hasAgriculturist: boolean
+  appState: AppState
 ) => {
   let name = itemRef[item.itemId].name;
   let maxHarvestDays = 28;
@@ -26,7 +22,7 @@ export const getCropCalculations = (
   let maxHarvests = 0;
   let maxHarvestsRounded = 0;
   let finalHarvestDay = 1;
-  let mFarmingLevel = farmingLevel;
+  let mFarmingLevel = appState.farmingLevel;
   let sellPricePerHarvest = 1;
   let perkSellPriceMultiplier = 1;
   let initialGrowTimeMultiplier = 1;
@@ -39,8 +35,8 @@ export const getCropCalculations = (
   let normalSellPrice = itemRef[item.itemId].quality.normal.sellsFor;
 
   //check if perks are active and adjust modifiers
-  if (hasTiller) perkSellPriceMultiplier += 0.1;
-  if (hasAgriculturist) {
+  if (appState.hasTiller) perkSellPriceMultiplier += 0.1;
+  if (appState.hasAgriculturist) {
     initialGrowTimeMultiplier -= 0.1;
     regrowthGrowTimeMultiplier -= 0.1;
   }
@@ -218,7 +214,7 @@ export const getCropCalculations = (
 
 export const getWineJuiceCalculations = (
   item: WineJuiceCalculationItem,
-  hasArtisan: boolean
+  appState: AppState
 ) => {
   let isWine = item.itemId === "wine" ? true : false;
   let basePrice = 0;
@@ -241,7 +237,7 @@ export const getWineJuiceCalculations = (
     basePrice *= itemRef[item.itemId].quality[qualityKey].caskPriceMultiplier!;
   }
 
-  if (hasArtisan) priceMultiplier += 0.4;
+  if (appState.hasArtisan) priceMultiplier += 0.4;
   sellPrice = basePrice * priceMultiplier;
   processingTimeInDays = processingTime! / 1600;
 
@@ -266,8 +262,7 @@ export const getWineJuiceCalculations = (
 
 export const getGoodCalculations = (
   item: GoodCalculationItem,
-  hasArtisan: boolean,
-  hasRancher: boolean
+  appState: AppState
 ) => {
   let isHoney = item.itemId === "honey" ? true : false;
   let basePrice = itemRef[item.itemId].quality
@@ -296,8 +291,8 @@ export const getGoodCalculations = (
     sellPrice = itemRef[item.itemId].quality[qualityKey].sellsFor;
   }
 
-  if (hasArtisan && getsArtisanBuff) priceMultiplier += 0.4;
-  if (hasRancher && getsRancherBuff) priceMultiplier += 0.2;
+  if (appState.hasArtisan && getsArtisanBuff) priceMultiplier += 0.4;
+  if (appState.hasRancher && getsRancherBuff) priceMultiplier += 0.2;
   sellPrice *= priceMultiplier;
 
   processingTimeInDays = processingTime! / 1600;
@@ -327,8 +322,7 @@ export const getGoodCalculations = (
 
 export const getCheeseCalculations = (
   item: CheeseCalculationItem,
-  hasArtisan: boolean,
-  hasRancher: boolean
+  appState: AppState
 ) => {
   let basePrice = itemRef[item.itemId].quality[item.startQuality].sellsFor;
   let sellPrice = basePrice;
@@ -358,8 +352,8 @@ export const getCheeseCalculations = (
   processingTimeInDaysModified = processingTimeInDays;
   if (processingTimeInDays < 1) processingTimeInDaysModified = 1;
 
-  if (hasArtisan) priceMultiplier += 0.4;
-  if (hasRancher) priceMultiplier += 0.2;
+  if (appState.hasArtisan) priceMultiplier += 0.4;
+  if (appState.hasRancher) priceMultiplier += 0.2;
   priceMultiplier = +priceMultiplier.toFixed(2);
   sellPrice *= priceMultiplier;
 
@@ -386,8 +380,7 @@ export const getCheeseCalculations = (
 
 export const getMayoCalculations = (
   item: MayoCalculationItem,
-  hasRancher: boolean,
-  hasArtisan: boolean
+  appState: AppState
 ) => {
   let itemId = "mayonnaise";
   let basePrice = itemRef["mayonnaise"].quality.normal.sellsFor;
@@ -430,8 +423,8 @@ export const getMayoCalculations = (
     name = `${itemRef[itemId].name} (${itemRef[item.ingredientId].name})`;
   else name = itemRef[itemId].name;
 
-  if (hasRancher) priceMultiplier += 0.2;
-  if (hasArtisan) priceMultiplier += 0.4;
+  if (appState.hasRancher) priceMultiplier += 0.2;
+  if (appState.hasArtisan) priceMultiplier += 0.4;
 
   sellPrice = basePrice * priceMultiplier * mayoQuantity;
 
@@ -460,7 +453,7 @@ export const getMayoCalculations = (
 
 export const getOilCalculations = (
   item: OilCalculationItem,
-  hasArtisan: boolean
+  appState: AppState
 ) => {
   let basePrice = itemRef[item.itemId].sellsFor;
   let sellPrice = basePrice;
@@ -476,7 +469,7 @@ export const getOilCalculations = (
   else processingTime = itemRef[item.itemId].processingTime!;
   processingTimeInDays = processingTime / 1600;
 
-  if (hasArtisan && getsArtisanBuff) priceMultiplier += 0.4;
+  if (appState.hasArtisan && getsArtisanBuff) priceMultiplier += 0.4;
   priceMultiplier = +priceMultiplier.toFixed(2);
   sellPrice *= priceMultiplier;
 
@@ -501,7 +494,7 @@ export const getOilCalculations = (
 
 export const getPreserveCalculations = (
   item: PreserveCalculationItem,
-  hasArtisan: boolean
+  appState: AppState
 ) => {
   let basePrice = itemRef[item.ingredientId].quality.normal.sellsFor * 2 + 50;
   let sellPrice = basePrice;
@@ -510,7 +503,7 @@ export const getPreserveCalculations = (
   let processingTime = itemRef[item.itemId].processingTime || 0;
   let processingTimeInDays = processingTime / 1600;
 
-  if (hasArtisan) priceMultiplier += 0.4;
+  if (appState.hasArtisan) priceMultiplier += 0.4;
   sellPrice *= priceMultiplier;
 
   if (item.isCustom) {

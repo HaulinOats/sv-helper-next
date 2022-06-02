@@ -2,23 +2,32 @@ import React, { ChangeEvent, FC, useContext, useState } from "react";
 import { PerksContext } from "../pages";
 
 interface LevelPerksSelectionProps {
-  setField: (prop: string, val: any) => void;
+  setDynamicField: (
+    stateName: string,
+    stateObj: { [key: string]: any }
+  ) => void;
 }
 
 const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
   const perksContext = useContext(PerksContext);
-  const [farmingLevel, setFarmingLevel] = useState(perksContext.farmingLevel);
 
   const farmingLevelOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     let tFarmingLevel = Math.round(Number(e.currentTarget.value));
+    let stateObj = {};
 
     if (tFarmingLevel < 5) {
-      props.setField("hasTiller", false);
-      props.setField("hasRancher", false);
+      stateObj = {
+        ...stateObj,
+        hasTiller: false,
+        hasRancher: false,
+      };
     }
     if (tFarmingLevel < 10) {
-      props.setField("hasAgriculturist", false);
-      props.setField("hasArtisan", false);
+      stateObj = {
+        ...stateObj,
+        hasAgriculturist: false,
+        hasArtisan: false,
+      };
     }
 
     if (tFarmingLevel > 10) {
@@ -27,48 +36,73 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
       tFarmingLevel = 0;
     }
 
-    setFarmingLevel(tFarmingLevel);
+    stateObj = {
+      ...stateObj,
+      farmingLevel: tFarmingLevel,
+    };
 
-    if (e.type === "blur") {
-      props.setField("farmingLevel", tFarmingLevel);
-    }
+    // if (e.type === "blur") {}
+
+    props.setDynamicField("app", stateObj);
   };
 
   const toggleTiller = (e: ChangeEvent<HTMLInputElement>) => {
-    props.setField("hasTiller", e.currentTarget.checked);
-
     if (e.currentTarget.checked) {
-      props.setField("hasRancher", false);
-    } else {
-      props.setField("hasArtisan", false);
-      props.setField("hasAgriculturist", false);
+      props.setDynamicField("app", {
+        hasTiller: e.currentTarget.checked,
+        hasRancher: false,
+      });
+      return;
     }
+
+    props.setDynamicField("app", {
+      hasTiller: e.currentTarget.checked,
+      hasArtisan: false,
+      hasAgriculturist: false,
+    });
   };
 
   const toggleRancher = (e: ChangeEvent<HTMLInputElement>) => {
-    props.setField("hasRancher", e.currentTarget.checked);
-
     if (e.currentTarget.checked) {
-      props.setField("hasTiller", false);
-      props.setField("hasArtisan", false);
-      props.setField("hasAgriculturist", false);
+      props.setDynamicField("app", {
+        hasArtisan: false,
+        hasAgriculturist: false,
+        hasTiller: false,
+        hasRancher: e.currentTarget.checked,
+      });
+      return;
     }
+
+    props.setDynamicField("app", {
+      hasRancher: e.currentTarget.checked,
+    });
   };
 
   const toggleAgriculturist = (e: ChangeEvent<HTMLInputElement>) => {
-    props.setField("hasAgriculturist", e.currentTarget.checked);
-
     if (e.currentTarget.checked) {
-      props.setField("hasArtisan", false);
+      props.setDynamicField("app", {
+        hasArtisan: false,
+        hasAgriculturist: e.currentTarget.checked,
+      });
+      return;
     }
+
+    props.setDynamicField("app", {
+      hasAgriculturist: e.currentTarget.checked,
+    });
   };
 
   const toggleArtisan = (e: ChangeEvent<HTMLInputElement>) => {
-    props.setField("hasArtisan", e.currentTarget.checked);
-
     if (e.currentTarget.checked) {
-      props.setField("hasAgriculturist", false);
+      props.setDynamicField("app", {
+        hasAgriculturist: false,
+        hasArtisan: e.currentTarget.checked,
+      });
+      return;
     }
+    props.setDynamicField("app", {
+      hasArtisan: e.currentTarget.checked,
+    });
   };
 
   return (
@@ -82,7 +116,7 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
           type="number"
           min="0"
           max="10"
-          value={farmingLevel}
+          value={perksContext.farmingLevel}
           onClick={(e) => e.currentTarget.select()}
           onChange={farmingLevelOnChange}
           onBlur={farmingLevelOnChange}
@@ -91,7 +125,7 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
           }}
         />
       </div>
-      {farmingLevel > 4 && (
+      {perksContext.farmingLevel > 4 && (
         <div>
           <div className="LevelPerksSelection-perk-container form-group mt-2">
             <div className="App-slider-container">
@@ -108,7 +142,7 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
               </div>
               <img
                 className="LevelPerksSelection-perk-icon align-middle"
-                src="./icons/general/36px-Tiller.webp"
+                src="/icons/general/36px-Tiller.webp"
                 alt="tiller"
               />
               <label
@@ -134,7 +168,7 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
               </div>
               <img
                 className="LevelPerksSelection-perk-icon align-middle"
-                src="./icons/general/36px-Rancher.png"
+                src="/icons/general/36px-Rancher.png"
                 alt="rancher"
               />
               <label
@@ -147,7 +181,7 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
           </div>
         </div>
       )}
-      {farmingLevel > 9 && perksContext.hasTiller && (
+      {perksContext.farmingLevel > 9 && perksContext.hasTiller && (
         <div>
           <div className="LevelPerksSelection-perk-container form-group mt-2">
             <div className="App-slider-container">
@@ -164,7 +198,7 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
               </div>
               <img
                 className="LevelPerksSelection-perk-icon align-middle"
-                src="./icons/general/36px-Agriculturist.webp"
+                src="/icons/general/36px-Agriculturist.webp"
                 alt="agriculturist"
               />
               <label
@@ -190,7 +224,7 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
               </div>
               <img
                 className="LevelPerksSelection-perk-icon align-middle"
-                src="./icons/general/36px-Artisan.webp"
+                src="/icons/general/36px-Artisan.webp"
                 alt="artisan"
               />
               <label

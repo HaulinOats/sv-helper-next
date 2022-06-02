@@ -25,7 +25,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
           <img
             className="CropDetail-main-icon"
             alt="crop-icon"
-            src={"./icons/crops/" + itemContext.itemRef[props.item.itemId].icon}
+            src={"/icons/crops/" + itemContext.itemRef[props.item.itemId].icon}
           />
           <span className="CropDetail-main-title">{props.item.name}</span>
         </span>
@@ -34,7 +34,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
             <span className="d-inline-block">
               <img
                 className="CropDetail-status-icon CropDetail-status-greenhouse-icon"
-                src="./icons/greenhouse.svg"
+                src="/icons/greenhouse.svg"
                 alt="greenhouse"
               />
             </span>
@@ -43,7 +43,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
             <span className="d-inline-block">
               <img
                 className="CropDetail-status-icon"
-                src="./icons/custom.svg"
+                src="/icons/custom.svg"
                 alt="custom"
               />
             </span>
@@ -61,7 +61,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
                   <img
                     className="CropDetail-season-icon"
                     src={
-                      "./icons/general/" +
+                      "/icons/general/" +
                       seasonIcons[
                         itemRefObj.seasons[props.item.seasonStartIdx!]
                       ]
@@ -89,7 +89,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
                 <div>
                   <img
                     src={
-                      "./icons/misc/" +
+                      "/icons/misc/" +
                       itemContext.itemRef[props.item.foodId].icon
                     }
                     alt="food"
@@ -106,8 +106,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
             <span>
               <img
                 src={
-                  "./icons/crops/" +
-                  itemContext.itemRef[itemRefObj.seedId!].icon
+                  "/icons/crops/" + itemContext.itemRef[itemRefObj.seedId!].icon
                 }
                 alt="seed-icon"
               />
@@ -120,7 +119,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
               {props.item.fertilizerId && (
                 <img
                   src={
-                    "./icons/general/" +
+                    "/icons/general/" +
                     itemContext.itemRef[props.item.fertilizerId].icon
                   }
                   alt="seed-icon"
@@ -170,7 +169,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
             <span>
               <img
                 className="CropDetail-daily-gold-icon"
-                src="./icons/general/27px-Gold.png"
+                src="/icons/general/27px-Gold.png"
                 alt="gold"
               />
               {props.item.sellPricePerHarvest
@@ -184,7 +183,7 @@ const CropDetail: FC<CropDetailProps> = (props) => {
             <span className="CropDetail-gold-per-day-total">
               <img
                 className="CropDetail-daily-gold-icon"
-                src="./icons/general/27px-Gold.png"
+                src="/icons/general/27px-Gold.png"
                 alt="gold"
               />
               {props.item.avgGoldPerDay

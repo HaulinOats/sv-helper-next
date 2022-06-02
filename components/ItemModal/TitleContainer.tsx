@@ -14,7 +14,7 @@ const App: React.FC<TitleContainerProps> = (props) => {
     titleElement = (
       <span className="ItemModal-main-icon-container">
         <img
-          src={"./icons/crops/" + itemContext.itemRef[props.item.itemId].icon}
+          src={"/icons/crops/" + itemContext.itemRef[props.item.itemId].icon}
           alt={itemContext.itemRef[props.item.itemId].icon}
         />
         <h2 className="d-inline align-bottom ms-3">
@@ -34,7 +34,7 @@ const App: React.FC<TitleContainerProps> = (props) => {
             </span>
           )}
           <img
-            src={"./icons/goods/" + itemContext.itemRef[props.item.itemId].icon}
+            src={"/icons/goods/" + itemContext.itemRef[props.item.itemId].icon}
             alt={itemContext.itemRef[props.item.itemId].icon}
           />
         </span>
@@ -61,7 +61,7 @@ const App: React.FC<TitleContainerProps> = (props) => {
           <span>
             <img
               className="ItemModal-status-icon ItemModal-status-greenhouse-icon"
-              src="./icons/greenhouse.svg"
+              src="/icons/greenhouse.svg"
               alt="greenhouse"
             />
           </span>
@@ -70,7 +70,7 @@ const App: React.FC<TitleContainerProps> = (props) => {
           <span>
             <img
               className="ItemModal-status-icon"
-              src="./icons/cask.svg"
+              src="/icons/cask.svg"
               alt="cask"
             />
           </span>
@@ -79,7 +79,7 @@ const App: React.FC<TitleContainerProps> = (props) => {
           <span>
             <img
               className="ItemModal-status-icon"
-              src="./icons/custom.svg"
+              src="/icons/custom.svg"
               alt="custom"
             />
           </span>

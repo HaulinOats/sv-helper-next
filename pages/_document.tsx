@@ -21,11 +21,13 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap"
-            rel="stylesheet"
+            rel="preload stylesheet"
+            as="style"
           />
           <link
-            rel="stylesheet"
+            rel="preload stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            as="style"
           />
           <body>
             <Main />

@@ -1,4 +1,3 @@
-import React, { FC, useContext } from "react";
 import { CalculationItem } from "../../types/CalculationItem.type";
 import { CropCalculationItem } from "../../types/CropCalculationItem.type";
 import { GoodCalculationItem } from "../../types/GoodCalculationItem";
@@ -13,7 +12,7 @@ interface ItemModalProps {
   deleteItem: (idx: number) => void;
 }
 
-const ItemModal: FC<ItemModalProps> = (props) => {
+const ItemModal: React.FC<ItemModalProps> = (props) => {
   return (
     <div className="ItemModal">
       <div className="ItemModal-clickguard" onClick={props.closeModal}></div>

@@ -16,7 +16,6 @@ const PerksContainer: FC<PerksContainerProps> = (props) => {
               src="./icons/general/36px-Tiller.webp"
               alt="tiller"
             />
-            {/* <span>Tiller</span> */}
           </span>
         )}
         {perksContext.hasRancher && (
@@ -26,7 +25,6 @@ const PerksContainer: FC<PerksContainerProps> = (props) => {
               src="./icons/general/36px-Rancher.png"
               alt="rancher"
             />
-            {/* <span>Rancher</span> */}
           </span>
         )}
         {perksContext.hasAgriculturist && (
@@ -36,7 +34,6 @@ const PerksContainer: FC<PerksContainerProps> = (props) => {
               src="./icons/general/36px-Agriculturist.webp"
               alt="agriculturist"
             />
-            {/* <span>Agriculturist</span> */}
           </span>
         )}
         {perksContext.hasArtisan && (
@@ -46,7 +43,6 @@ const PerksContainer: FC<PerksContainerProps> = (props) => {
               src="./icons/general/36px-Artisan.webp"
               alt="artisan"
             />
-            {/* <span>Artisan</span> */}
           </span>
         )}
         {!perksContext.hasArtisan &&

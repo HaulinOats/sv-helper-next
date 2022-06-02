@@ -73,3 +73,7 @@ table th {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
 }
+.PerksContainer-perks-icon {
+  width: 17px;
+  height: 17px;
+}

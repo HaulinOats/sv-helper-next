@@ -83,7 +83,7 @@ const ItemContainer: FC<ItemContainerProps> = (props) => {
           <button className="my-2 App-delete-all" onClick={props.deleteAll}>
             <img
               className="App-delete-all-icon"
-              src="./icons/general/trash-can.svg"
+              src="/icons/general/trash-can.svg"
               alt="trash"
             />
             Delete All Items

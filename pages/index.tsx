@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useRef, useState } from "react";
 import { NextPage } from "next";
-import soilModifiers from "../public/soil-modifiers";
 import AddItem from "../components/AddItem";
 import InfoPanel from "../components/InfoPanel";
 import ItemContainer from "../components/ItemContainer";
@@ -24,8 +23,9 @@ import {
   getWineJuiceCalculations,
 } from "../util/calculations";
 import { getItemFromStorage } from "../util/storage";
+import { AppState } from "../types/AppState.type";
 
-const defaultPerkValues = {
+const perkDefaultValues = {
   farmingLevel: 0,
   hasTiller: false,
   hasAgriculturist: false,
@@ -33,19 +33,7 @@ const defaultPerkValues = {
   hasArtisan: false,
 };
 
-export const PerksContext = createContext(defaultPerkValues);
-
-interface AppState {
-  selectedItemsArr: CalculationItem[];
-  addItemPanelIsShowing: boolean;
-  showInfoPanel: boolean;
-  sortByField: string;
-  farmingLevel: number;
-  hasTiller: boolean;
-  hasAgriculturist: boolean;
-  hasRancher: boolean;
-  hasArtisan: boolean;
-}
+export const PerksContext = createContext(perkDefaultValues);
 
 const Home: NextPage = () => {
   const appRef = useRef<HTMLDivElement>(null);
@@ -56,10 +44,23 @@ const Home: NextPage = () => {
     addItemPanelIsShowing: false,
     showInfoPanel: false,
     sortByField: "addedAt",
-    ...defaultPerkValues,
+    ...perkDefaultValues,
   });
 
   useEffect(() => {
+    console.log("on mount...");
+    //set dynamic background
+    let currentDate = new Date();
+    if (currentDate.getHours() > 7 && currentDate.getHours() < 19) {
+      appRef.current!.style.backgroundImage = "url(./day-bg.png)";
+    } else {
+      appRef.current!.style.backgroundImage = "url(./night-bg.png)";
+    }
+
+    //adjusts bottom container starting position based on height of header
+    let height = appInnerRef.current?.offsetHeight;
+    appRef.current!.style.marginTop = `${height}px`;
+
     //check if dataVersion variables match, if not, purge stored items
     //change this value when needing to purge items from storage
     //should only need to change when major changes to dataset occur
@@ -78,37 +79,39 @@ const Home: NextPage = () => {
       purgeData = true;
     }
 
-    //get items from storage or set to default state values
     setAppState({
       ...appState,
+      selectedItemsArr: !purgeData
+        ? getItemFromStorage("selectedItems")
+        : [] || appState.selectedItemsArr,
+      sortByField: getItemFromStorage("sortByField") || appState.sortByField,
       farmingLevel: getItemFromStorage("farmingLevel") || appState.farmingLevel,
       hasTiller: getItemFromStorage("hasTiller") || appState.hasTiller,
       hasRancher: getItemFromStorage("hasRancher") || appState.hasRancher,
       hasAgriculturist:
         getItemFromStorage("hasAgriculturist") || appState.hasAgriculturist,
       hasArtisan: getItemFromStorage("hasArtisan") || appState.hasArtisan,
-      sortByField: getItemFromStorage("sortByField") || appState.sortByField,
-      selectedItemsArr: !purgeData
-        ? getItemFromStorage("selectedItems")
-        : [] || appState.selectedItemsArr,
     });
-
-    //set dynamic background
-    let currentDate = new Date();
-    if (currentDate.getHours() > 7 && currentDate.getHours() < 19) {
-      appRef.current!.style.backgroundImage = "url(./day-bg.png)";
-    } else {
-      appRef.current!.style.backgroundImage = "url(./night-bg.png)";
-    }
-
-    //adjusts bottom container starting position based on height of header
-    let height = appInnerRef.current?.offsetHeight;
-    appRef.current!.style.marginTop = `${height}px`;
   }, []);
 
   useEffect(() => {
-    updateStorage();
-  });
+    setTimeout(() => {
+      updateAppStorage();
+    }, 0);
+  }, [appState]);
+
+  const updateAppStorage = () => {
+    localStorage.setItem(
+      "seletedItemsArr",
+      JSON.stringify(appState.selectedItemsArr)
+    );
+    localStorage.setItem("sortByField", appState.sortByField);
+    localStorage.setItem("farmingLevel", String(appState.farmingLevel));
+    localStorage.setItem("hasTiller", String(appState.hasTiller));
+    localStorage.setItem("hasRancher", String(appState.hasRancher));
+    localStorage.setItem("hasAgriculturist", String(appState.hasAgriculturist));
+    localStorage.setItem("hasArtisan", String(appState.hasArtisan));
+  };
 
   const updateCalculationsAndSort = (
     selectedItems: CalculationItem[],
@@ -121,48 +124,43 @@ const Home: NextPage = () => {
         case "crop":
           calculationObj = getCropCalculations(
             item as CropCalculationItem,
-            appState.farmingLevel,
-            appState.hasTiller,
-            appState.hasAgriculturist
+            appState
           );
           break;
         case "wineJuice":
           calculationObj = getWineJuiceCalculations(
             item as WineJuiceCalculationItem,
-            appState.hasArtisan
+            appState
           );
           break;
         case "preserves":
           calculationObj = getPreserveCalculations(
             item as PreserveCalculationItem,
-            appState.hasArtisan
+            appState
           );
           break;
         case "good":
           calculationObj = getGoodCalculations(
             item as GoodCalculationItem,
-            appState.hasArtisan,
-            appState.hasRancher
+            appState
           );
           break;
         case "cheese":
           calculationObj = getCheeseCalculations(
             item as CheeseCalculationItem,
-            appState.hasArtisan,
-            appState.hasRancher
+            appState
           );
           break;
         case "mayo":
           calculationObj = getMayoCalculations(
             item as MayoCalculationItem,
-            appState.hasRancher,
-            appState.hasArtisan
+            appState
           );
           break;
         case "oil":
           calculationObj = getOilCalculations(
             item as OilCalculationItem,
-            appState.hasArtisan
+            appState
           );
           break;
         default:
@@ -187,19 +185,6 @@ const Home: NextPage = () => {
     });
   };
 
-  const updateStorage = () => {
-    localStorage.setItem(
-      "selectedItems",
-      JSON.stringify(appState.selectedItemsArr)
-    );
-    localStorage.setItem("sortByField", appState.sortByField);
-    localStorage.setItem("farmingLevel", String(appState.farmingLevel));
-    localStorage.setItem("hasTiller", String(appState.hasTiller));
-    localStorage.setItem("hasRancher", String(appState.hasRancher));
-    localStorage.setItem("hasAgriculturist", String(appState.hasAgriculturist));
-    localStorage.setItem("hasArtisan", String(appState.hasArtisan));
-  };
-
   const hideAddItemPanel = () => {
     setAppState({ ...appState, addItemPanelIsShowing: false });
   };
@@ -208,8 +193,15 @@ const Home: NextPage = () => {
     setAppState({ ...appState, addItemPanelIsShowing: true });
   };
 
-  const setDynamicField = (prop: string, val: any) => {
-    setAppState({ ...appState, [prop]: val });
+  const setDynamicField = (
+    stateName: string,
+    stateObj: { [key: string]: boolean | number }
+  ) => {
+    switch (stateName) {
+      case "app":
+        setAppState({ ...appState, ...stateObj });
+        break;
+    }
   };
 
   const deleteItem = (idx: number) => {
@@ -268,11 +260,10 @@ const Home: NextPage = () => {
     >
       <div ref={appRef} className="App container-fluid">
         <AddItem
-          soilModifiers={soilModifiers}
           addItemPanelIsShowing={appState.addItemPanelIsShowing}
           hideAddItemPanel={hideAddItemPanel}
           addItem={addItem}
-          setField={setDynamicField}
+          setDynamicField={setDynamicField}
         />
         {appState.showInfoPanel && (
           <InfoPanel

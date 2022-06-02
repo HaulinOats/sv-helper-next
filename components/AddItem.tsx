@@ -10,66 +10,50 @@ import {
   seasonDropdownOptions,
 } from "../util/helpers";
 import { ItemContext } from "../pages/_app";
+import { AddItemState } from "../types/AddItemState.type";
 
 interface Props {
-  soilModifiers: Object;
   addItemPanelIsShowing: boolean;
   hideAddItemPanel: () => void;
   addItem: (item: any) => void;
-  setField: (prop: string, val: string) => void;
+  setDynamicField: (
+    stateName: string,
+    stateObj: { [key: string]: any }
+  ) => void;
 }
 
 const AddItem: React.FC<Props> = (props: Props) => {
   const itemContext = useContext(ItemContext);
 
-  const [fertilizerId, setFertilizerId] = useState<string | undefined>(
-    undefined
-  );
-  const [fertilizerCost, setFertilizerCost] = useState(0);
-  const [foodId, setFoodId] = useState<string | undefined>(undefined);
-  const [foodFarmingBuff, setFoodFarmingBuff] = useState(0);
-  const [seedCost, setSeedCost] = useState(0);
-  // const [priceModifierIsActive, setPriceModifierIsActive] = useState(false);
-  const [itemId, setItemId] = useState<string | undefined>(undefined);
-  const [seasonStartIdx, setSeasonStartIdx] = useState(0);
-  const [plantingDay, setPlantingDay] = useState(1);
-  const [isGreenhouse, setIsGreenhouse] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(
-    categoryDropdownOptions[0].value
-  );
-  const [cropLimitToSeason, setCropLimitToSeason] = useState(
-    seasonDropdownOptions[0].value
-  );
-  const [selectedGood, setSelectedGood] = useState(
-    goodsDropdownOptions[0].value
-  );
-  const [wineJuiceLimitToSeason, setWineJuiceLimitToSeason] = useState(
-    seasonDropdownOptions[0].value
-  );
-  const [preservesLimitToSeason, setPreservesLimitToSeason] = useState(
-    seasonDropdownOptions[0].value
-  );
-  const [wineProduceId, setWineProduceId] = useState<string | undefined>(
-    undefined
-  );
-  const [isCask, setIsCask] = useState(false);
-  const [caskQuality, setCaskQuality] = useState("iridium");
-  const [preservesProduceId, setPreservesProduceId] = useState<
-    string | undefined
-  >(undefined);
-  const [honeyFlowerId, setHoneyFlowerId] = useState<string | undefined>(
-    undefined
-  );
-  const [milkType, setMilkType] = useState(milkTypeDropdownOptions[0].value);
-  const [milkIsLarge, setMilkIsLarge] = useState(false);
-  const [eggType, setEggType] = useState("egg");
-  const [eggQuality, setEggQuality] = useState(qualityDropdownOptions[0].value);
-  const [oilType, setOilType] = useState(oilTypeDropdownOptions[0].value);
-  const [oilIngredientId, setOilIngredientId] = useState(
-    itemContext.itemRef["oil"].madeFrom[0]
-  );
-  const [isCustom, setIsCustom] = useState(false);
-  const [customSellPrice, setCustomSellPrice] = useState(1);
+  const [addItemState, setAddItemState] = useState<AddItemState>({
+    fertilizerId: undefined,
+    fertilizerCost: 0,
+    foodId: undefined,
+    foodFarmingBuff: 0,
+    seedCost: 0,
+    itemId: undefined,
+    seasonStartIdx: 0,
+    plantingDay: 1,
+    isGreenhouse: false,
+    selectedCategory: categoryDropdownOptions[0].value,
+    cropLimitToSeason: seasonDropdownOptions[0].value,
+    selectedGood: goodsDropdownOptions[0].value,
+    wineJuiceLimitToSeason: seasonDropdownOptions[0].value,
+    preservesLimitToSeason: seasonDropdownOptions[0].value,
+    wineProduceId: undefined,
+    isCask: false,
+    caskQuality: "iridium",
+    preservesProduceId: undefined,
+    honeyFlowerId: undefined,
+    milkType: milkTypeDropdownOptions[0].value,
+    milkIsLarge: false,
+    eggType: "egg",
+    eggQuality: qualityDropdownOptions[0].value,
+    oilType: oilTypeDropdownOptions[0].value,
+    oilIngredientId: itemContext.itemRef["oil"].madeFrom[0],
+    isCustom: false,
+    customSellPrice: 1,
+  });
 
   const selectInput = (e: Event) => {
     (e.target as HTMLInputElement).select();
@@ -80,203 +64,427 @@ const AddItem: React.FC<Props> = (props: Props) => {
   };
 
   const resetCropState = () => {
-    setItemId(undefined);
-    setSeedCost(0);
-    setSeasonStartIdx(0);
-    setPlantingDay(1);
-    setCustomSellPrice(1);
-    // setCropLimitToSeason(seasonDropdownOptions[0].value);
-    setIsGreenhouse(false);
+    setAddItemState({
+      ...addItemState,
+      itemId: undefined,
+      seedCost: 0,
+      seasonStartIdx: 0,
+      plantingDay: 1,
+      customSellPrice: 1,
+      isGreenhouse: false,
+    });
   };
 
   const resetGoodState = () => {
-    setSelectedGood(goodsDropdownOptions[0].value);
-    setWineJuiceLimitToSeason(seasonDropdownOptions[0].value);
-    setPreservesLimitToSeason(seasonDropdownOptions[0].value);
-    setWineProduceId(undefined);
-    setIsCask(false);
-    setCaskQuality("iridium");
-    setPreservesProduceId(undefined);
-    setHoneyFlowerId(undefined);
-    setMilkType(milkTypeDropdownOptions[0].value);
-    setMilkIsLarge(false);
-    setEggType("egg");
-    setEggQuality(qualityDropdownOptions[0].value);
-    setCustomSellPrice(1);
+    setAddItemState({
+      ...addItemState,
+      selectedGood: goodsDropdownOptions[0].value,
+      wineJuiceLimitToSeason: seasonDropdownOptions[0].value,
+      preservesLimitToSeason: seasonDropdownOptions[0].value,
+      wineProduceId: undefined,
+      isCask: false,
+      caskQuality: "iridium",
+      preservesProduceId: undefined,
+      honeyFlowerId: undefined,
+      milkType: milkTypeDropdownOptions[0].value,
+      milkIsLarge: false,
+      eggType: "egg",
+      eggQuality: qualityDropdownOptions[0].value,
+      customSellPrice: 1,
+    });
   };
 
   const cropOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
     resetCropState();
-    setItemId(e.target.value);
+    let newState: any = {
+      itemId: e.currentTarget.value,
+      seedCost: 0,
+    };
     // For crops that only grow in Greenhouse (Cactus Fruit)
-    if (!itemContext.itemRef[e.target.value].seasons.length)
-      setIsGreenhouse(true);
-    setSeedCost(0);
+    if (!itemContext.itemRef[e.target.value].seasons.length) {
+      newState = {
+        ...newState,
+        isGreenhouse: true,
+      };
+    }
+
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
   const selectedCategoryOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCategory((e.target as HTMLSelectElement).value);
     resetCropState();
     resetGoodState();
+    setAddItemState({
+      ...addItemState,
+      selectedCategory: e.currentTarget.value,
+    });
   };
 
   const fertilizerOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    let target = e.target as HTMLSelectElement;
-    if (target.value === "") setFertilizerId(undefined);
-    else setFertilizerId(target.value);
-    setFertilizerCost(0);
+    let newState: any = {
+      fertilizerCost: 0,
+    };
+
+    if (e.currentTarget.value === "") {
+      newState = {
+        ...newState,
+        fertilizerId: undefined,
+      };
+    } else {
+      newState = {
+        ...newState,
+        fertilizerId: e.currentTarget.value,
+      };
+    }
+
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
   const fertilizerVendorOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFertilizerCost(+(e.target as HTMLSelectElement).value);
+    setAddItemState({
+      ...addItemState,
+      fertilizerCost: Number(e.currentTarget.value),
+    });
   };
 
   const changeFoodId = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "") setFoodId(undefined);
-    else setFoodId(e.target.value);
-    setFoodFarmingBuff(Number(e.target.selectedOptions[0].dataset.farmingBuff));
+    let newState: any = {
+      foodFarmingBuff: Number(
+        e.currentTarget.selectedOptions[0].dataset.farmingBuff
+      ),
+    };
+    if (e.target.value === "") {
+      newState = {
+        ...newState,
+        foodId: undefined,
+      };
+    } else {
+      newState = {
+        ...newState,
+        foodId: e.currentTarget.value,
+      };
+    }
+
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
-  // const togglePriceModifier = e => {
-  //   setPriceModifierIsActive(!priceModifierIsActive);
-  // }
-
   const toggleIsGreenhouse = () => {
-    setIsGreenhouse(!isGreenhouse);
+    let newState: any = {
+      isGreenhouse: !addItemState.isGreenhouse,
+    };
 
-    if (isGreenhouse) {
-      setSeasonStartIdx(0);
-      setPlantingDay(1);
+    if (addItemState.isGreenhouse) {
+      newState = {
+        ...newState,
+        seasonStartIdx: 0,
+        plantingDay: 1,
+      };
     }
+
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
   const seedVendorOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSeedCost(+e.target.value);
+    setAddItemState({
+      ...addItemState,
+      seedCost: +e.currentTarget.value,
+    });
   };
 
   const seasonOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSeasonStartIdx(+e.target.value);
+    setAddItemState({
+      ...addItemState,
+      seasonStartIdx: +e.currentTarget.value,
+    });
   };
 
   const plantingDayOnChange = (
     e: ChangeEvent<HTMLInputElement>,
     isChange = false
   ) => {
-    if (isChange) setPlantingDay(Math.round(Number(e.target.value)));
+    let newState = {};
 
-    if (plantingDay > 28) setPlantingDay(28);
-    if (plantingDay < 1) setPlantingDay(1);
+    if (isChange) {
+      newState = {
+        plantingDay: Math.round(+e.currentTarget.value),
+      };
+    }
+
+    if (addItemState.plantingDay > 28) {
+      newState = {
+        ...newState,
+        plantingDay: 28,
+      };
+    } else if (addItemState.plantingDay < 1) {
+      newState = {
+        ...newState,
+        plantingDay: 1,
+      };
+    } else {
+      newState = {
+        ...newState,
+        plantingDay: Math.round(+e.currentTarget.value),
+      };
+    }
+
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
   const cropLimitToSeasonOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setCropLimitToSeason(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      cropLimitToSeason: e.currentTarget.value,
+    });
   };
 
   const selectedGoodOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedGood(e.target.value);
-    setCaskQuality("iridium");
-    setIsCask(false);
+    setAddItemState({
+      ...addItemState,
+      selectedGood: e.currentTarget.value,
+      caskQuality: "iridium",
+      isCask: false,
+    });
   };
 
   const wineJuiceLimitToSeasonOnChange = (
     e: ChangeEvent<HTMLSelectElement>
   ) => {
-    setWineJuiceLimitToSeason(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      wineJuiceLimitToSeason: e.currentTarget.value,
+    });
   };
 
   const toggleIsCask = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsCask(!isCask);
+    setAddItemState({
+      ...addItemState,
+      isCask: !addItemState.isCask,
+    });
   };
 
   const caskQualityOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setCaskQuality(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      caskQuality: e.currentTarget.value,
+    });
   };
 
   const preservesLimitToSeasonOnChange = (
     e: ChangeEvent<HTMLSelectElement>
   ) => {
-    setPreservesLimitToSeason(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      preservesLimitToSeason: e.currentTarget.value,
+    });
   };
 
   const wineProduceIdOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "") setWineProduceId(undefined);
-    else setWineProduceId(e.target.value);
+    if (e.target.value === "") {
+      setAddItemState({
+        ...addItemState,
+        wineProduceId: undefined,
+      });
+      return;
+    }
+    setAddItemState({
+      ...addItemState,
+      wineProduceId: e.currentTarget.value,
+    });
   };
 
   const preservesProduceIdOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "") setPreservesProduceId(undefined);
-    else setPreservesProduceId(e.target.value);
+    if (e.target.value === "") {
+      setAddItemState({
+        ...addItemState,
+        preservesProduceId: undefined,
+      });
+      return;
+    }
+    setAddItemState({
+      ...addItemState,
+      preservesProduceId: e.currentTarget.value,
+    });
   };
 
   const honeyFlowerIdOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "") setHoneyFlowerId(undefined);
-    else setHoneyFlowerId(e.target.value);
+    if (e.target.value === "") {
+      setAddItemState({
+        ...addItemState,
+        honeyFlowerId: undefined,
+      });
+      return;
+    }
+    setAddItemState({
+      ...addItemState,
+      honeyFlowerId: e.currentTarget.value,
+    });
   };
 
   const milkTypeOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setMilkType(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      milkType: e.currentTarget.value,
+    });
   };
 
   const toggleMilkIsLarge = (e: ChangeEvent<HTMLInputElement>) => {
-    setMilkIsLarge(!milkIsLarge);
+    let newState: any = {
+      milkIsLarge: !addItemState.milkIsLarge,
+    };
 
-    if (isCask) {
-      setCaskQuality("iridium");
+    if (addItemState.isCask) {
+      newState = {
+        ...newState,
+        caskQuality: "iridium",
+      };
     }
+
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
   const eggTypeOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setEggType(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      eggType: e.currentTarget.value,
+    });
   };
 
   const eggQualityOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setEggQuality(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      eggQuality: e.currentTarget.value,
+    });
   };
 
   const oilTypeOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setOilType(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      oilType: e.currentTarget.value,
+    });
   };
 
   const oilIngredientIdOnChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setOilIngredientId(e.target.value);
+    setAddItemState({
+      ...addItemState,
+      oilIngredientId: e.currentTarget.value,
+    });
   };
 
   const isCustomOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsCustom(!isCustom);
-    setFertilizerId(undefined);
-    setFertilizerCost(0);
-    setSeedCost(0);
-    setCustomSellPrice(1);
+    setAddItemState({
+      ...addItemState,
+      isCustom: !addItemState.isCustom,
+      fertilizerId: undefined,
+      fertilizerCost: 0,
+      seedCost: 0,
+      customSellPrice: 1,
+    });
   };
 
   const fertilizerCostOnChange = (
     e: ChangeEvent<HTMLInputElement>,
     isChange = false
   ) => {
-    if (isChange) setFertilizerCost(Math.round(Number(e.target.value)));
+    let newState: any = {};
+    if (isChange) {
+      newState = {
+        fertilizerCost: Math.round(+e.currentTarget.value),
+      };
+    }
 
-    if (fertilizerCost > 1000) setFertilizerCost(1000);
-    if (fertilizerCost < 0) setFertilizerCost(0);
+    if (addItemState.fertilizerCost > 1000) {
+      newState = {
+        ...newState,
+        fertilizerCost: 1000,
+      };
+    }
+    if (addItemState.fertilizerCost < 0) {
+      newState = {
+        ...newState,
+        fertilizerCost: 0,
+      };
+    }
+
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
   const seedCostOnChange = (
     e: ChangeEvent<HTMLInputElement>,
     isChange = false
   ) => {
-    if (isChange) setSeedCost(Math.round(Number(e.target.value)));
+    let newState: any = {};
+    if (isChange) {
+      newState = {
+        seedCost: Math.round(+e.currentTarget.value),
+      };
+    }
 
-    if (seedCost > 1000) setSeedCost(1000);
-    if (seedCost < 0) setSeedCost(0);
+    if (addItemState.seedCost > 1000) {
+      newState = {
+        ...newState,
+        seedCost: 1000,
+      };
+    }
+    if (addItemState.seedCost < 0) {
+      newState = {
+        ...newState,
+        seedCost: 0,
+      };
+    }
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
   const customSellPriceOnChange = (
     e: ChangeEvent<HTMLInputElement>,
     isChange = false
   ) => {
-    if (isChange) setCustomSellPrice(Math.round(Number(e.target.value)));
+    let newState: any = {};
+    if (isChange) {
+      newState = {
+        customSellPrice: Math.round(+e.currentTarget.value),
+      };
+    }
 
-    if (customSellPrice > 15000) setCustomSellPrice(15000);
-    if (customSellPrice < 1) setCustomSellPrice(1);
+    if (addItemState.customSellPrice > 15000) {
+      newState = {
+        ...newState,
+        customSellPrice: 1000,
+      };
+    }
+    if (addItemState.customSellPrice < 1) {
+      newState = {
+        ...newState,
+        customSellPrice: 1,
+      };
+    }
+    setAddItemState({
+      ...addItemState,
+      ...newState,
+    });
   };
 
   const addCrop = () => {
@@ -286,127 +494,133 @@ const AddItem: React.FC<Props> = (props: Props) => {
 
     props.addItem({
       addedAt: Date.now(),
-      itemId,
-      foodId,
-      foodFarmingBuff,
-      seedCost,
-      fertilizerId,
-      fertilizerCost,
-      seasonStartIdx,
-      plantingDay,
-      isGreenhouse,
-      // priceModifierIsActive:modifierActive,
-      isCustom,
-      customSellPrice,
+      itemId: addItemState.itemId,
+      foodId: addItemState.foodId,
+      foodFarmingBuff: addItemState.foodFarmingBuff,
+      seedCost: addItemState.seedCost,
+      fertilizerId: addItemState.fertilizerId,
+      fertilizerCost: addItemState.fertilizerCost,
+      seasonStartIdx: addItemState.seasonStartIdx,
+      plantingDay: addItemState.plantingDay,
+      isGreenhouse: addItemState.isGreenhouse,
+      isCustom: addItemState.isCustom,
+      customSellPrice: addItemState.customSellPrice,
       displayCategory: "crop",
     });
     resetCropState();
   };
 
   const addWineOrJuice = () => {
-    if (!wineProduceId) return;
+    if (!addItemState.wineProduceId) return;
 
-    let isWine = itemContext.itemRef[wineProduceId].isWineable ? true : false;
-    let ingredientId = wineProduceId;
-    let name = `${itemContext.itemRef[wineProduceId].name} Wine`;
+    let isWine = itemContext.itemRef[addItemState.wineProduceId].isWineable
+      ? true
+      : false;
+    let ingredientId = addItemState.wineProduceId;
+    let name = `${itemContext.itemRef[addItemState.wineProduceId].name} Wine`;
     let itemId = "wine";
     let qualityId;
 
     if (!isWine) {
       itemId = "juice";
-      name = `${itemContext.itemRef[wineProduceId].name} Wine`;
+      name = `${itemContext.itemRef[addItemState.wineProduceId].name} Wine`;
     }
 
-    if (isCask) {
-      qualityId = caskQuality;
+    if (addItemState.isCask) {
+      qualityId = addItemState.caskQuality;
     }
 
     props.addItem({
       addedAt: Date.now(),
       itemId,
       name,
-      isCustom,
-      customSellPrice,
+      isCustom: addItemState.isCustom,
+      customSellPrice: addItemState.customSellPrice,
       ingredientId,
-      isCask,
+      isCask: addItemState.isCask,
       qualityId,
       displayCategory: "wineJuice",
     });
   };
 
   const addPreserve = () => {
-    if (!preservesProduceId) return;
+    if (!addItemState.preservesProduceId) return;
 
     let isJelly =
-      itemContext.itemRef[preservesProduceId].subCategory === "fruits"
+      itemContext.itemRef[addItemState.preservesProduceId].subCategory ===
+      "fruits"
         ? true
         : false;
     let itemId = "jelly";
-    let name = `${itemContext.itemRef[preservesProduceId].name} Jelly`;
-    let ingredientId = preservesProduceId;
+    let name = `${
+      itemContext.itemRef[addItemState.preservesProduceId].name
+    } Jelly`;
+    let ingredientId = addItemState.preservesProduceId;
 
     if (!isJelly) {
       itemId = "pickles";
-      name = `Pickled ${itemContext.itemRef[preservesProduceId].name}`;
+      name = `Pickled ${
+        itemContext.itemRef[addItemState.preservesProduceId].name
+      }`;
     }
 
     props.addItem({
       addedAt: Date.now(),
       itemId,
       name,
-      isCustom,
-      customSellPrice,
+      isCustom: addItemState.isCustom,
+      customSellPrice: addItemState.customSellPrice,
       ingredientId,
       displayCategory: "preserves",
     });
   };
 
   const addGood = () => {
-    let isHoney = selectedGood === "honey" ? true : false;
-    let name = itemContext.itemRef[selectedGood].name;
+    let isHoney = addItemState.selectedGood === "honey" ? true : false;
+    let name = itemContext.itemRef[addItemState.selectedGood].name;
     let quality;
 
-    if (isHoney && honeyFlowerId) {
-      name = `${itemContext.itemRef[honeyFlowerId].name} ${name}`;
+    if (isHoney && addItemState.honeyFlowerId) {
+      name = `${itemContext.itemRef[addItemState.honeyFlowerId].name} ${name}`;
     }
 
-    if (isCask) {
-      quality = caskQuality;
+    if (addItemState.isCask) {
+      quality = addItemState.caskQuality;
     }
 
     props.addItem({
       addedAt: Date.now(),
-      itemId: selectedGood,
+      itemId: addItemState.selectedGood,
       name,
       quality,
-      isCustom,
-      isCask,
-      customSellPrice,
+      isCustom: addItemState.isCustom,
+      isCask: addItemState.isCask,
+      customSellPrice: addItemState.customSellPrice,
       ingredientId: isHoney
-        ? honeyFlowerId
-        : itemContext.itemRef[selectedGood].madeFrom,
+        ? addItemState.honeyFlowerId
+        : itemContext.itemRef[addItemState.selectedGood].madeFrom,
       displayCategory: "good",
     });
   };
 
   const addCheese = () => {
-    let cheeseId = milkType === "cow" ? "cheese" : "goat_cheese";
+    let cheeseId = addItemState.milkType === "cow" ? "cheese" : "goat_cheese";
     let name = itemContext.itemRef[cheeseId].name;
     let ingredientId;
     let startQuality = "normal";
     let quality;
 
-    if (milkType === "cow") {
-      if (milkIsLarge) ingredientId = "large_milk";
+    if (addItemState.milkType === "cow") {
+      if (addItemState.milkIsLarge) ingredientId = "large_milk";
       else ingredientId = "milk";
     } else {
-      if (milkIsLarge) ingredientId = "large_goat_milk";
+      if (addItemState.milkIsLarge) ingredientId = "large_goat_milk";
       else ingredientId = "goat_milk";
     }
 
-    if (milkIsLarge) startQuality = "gold";
-    if (isCask) {
-      quality = caskQuality;
+    if (addItemState.milkIsLarge) startQuality = "gold";
+    if (addItemState.isCask) {
+      quality = addItemState.caskQuality;
     }
 
     props.addItem({
@@ -415,11 +629,11 @@ const AddItem: React.FC<Props> = (props: Props) => {
       name,
       startQuality,
       quality,
-      isCustom,
-      isCask,
-      customSellPrice,
+      isCustom: addItemState.isCustom,
+      isCask: addItemState.isCask,
+      customSellPrice: addItemState.customSellPrice,
       ingredientId,
-      isLarge: milkIsLarge,
+      isLarge: addItemState.milkIsLarge,
       displayCategory: "cheese",
     });
   };
@@ -427,10 +641,10 @@ const AddItem: React.FC<Props> = (props: Props) => {
   const addMayo = () => {
     props.addItem({
       addedAt: Date.now(),
-      isCustom,
-      customSellPrice,
-      ingredientId: eggType,
-      eggQuality: eggQuality,
+      isCustom: addItemState.isCustom,
+      customSellPrice: addItemState.customSellPrice,
+      ingredientId: addItemState.eggType,
+      eggQuality: addItemState.eggQuality,
       displayCategory: "mayo",
     });
   };
@@ -438,13 +652,13 @@ const AddItem: React.FC<Props> = (props: Props) => {
   const addOil = () => {
     props.addItem({
       addedAt: Date.now(),
-      isCustom,
-      customSellPrice,
-      itemId: oilType,
+      isCustom: addItemState.isCustom,
+      customSellPrice: addItemState.customSellPrice,
+      itemId: addItemState.oilType,
       ingredientId:
-        oilType === "oil"
-          ? oilIngredientId
-          : itemContext.itemRef[oilType].madeFrom[0],
+        addItemState.oilType === "oil"
+          ? addItemState.oilIngredientId
+          : itemContext.itemRef[addItemState.oilType].madeFrom[0],
       displayCategory: "oil",
     });
   };
@@ -457,7 +671,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
       ></div>
       <div className="AddItem-inner">
         <h2>Level and Perks</h2>
-        <LevelPerksSelection setField={props.setField} />
+        <LevelPerksSelection setDynamicField={props.setDynamicField} />
         <hr></hr>
         <div className="App-slider-container">
           <div className="App-slider-inner">
@@ -465,7 +679,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
               <input
                 type="checkbox"
                 id="is-custom"
-                checked={isCustom}
+                checked={addItemState.isCustom}
                 onChange={(e) => isCustomOnChange(e)}
               />
               <div className="slider round"></div>
@@ -474,11 +688,11 @@ const AddItem: React.FC<Props> = (props: Props) => {
           <label htmlFor="is-custom">Enter Values Myself</label>
           <img
             className="AddItem-custom-img"
-            src="./icons/custom.svg"
+            src="/icons/custom.svg"
             alt="custom"
           />
         </div>
-        {isCustom && (
+        {addItemState.isCustom && (
           <p className="AddItem-custom-subtitle">
             <i>Calculations will ignore perk selections</i>
           </p>
@@ -487,7 +701,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
           <label>Select Category:</label>
           <select
             className="App-category-select"
-            value={selectedCategory}
+            value={addItemState.selectedCategory}
             onChange={(e) => selectedCategoryOnChange(e)}
           >
             {categoryDropdownOptions.map((category) => {
@@ -501,28 +715,15 @@ const AddItem: React.FC<Props> = (props: Props) => {
         </div>
         <div className="AddItem-bottom-container">
           {/* Menu for showing crops */}
-          {selectedCategory === "crops" && (
+          {addItemState.selectedCategory === "crops" && (
             <div className="AddItem-category-container">
-              {/* {!isCustom &&
-                <div className="form-group">
-                  <div className="App-slider-container">
-                    <div className="App-slider-inner">
-                      <label className="switch" htmlFor="avg-selling-modifier-checkbox">
-                        <input type="checkbox" id="avg-selling-modifier-checkbox" checked={priceModifierIsActive} onChange={togglePriceModifier} />
-                        <div className="slider round"></div>
-                      </label>
-                    </div>
-                    <label className="AddItem-selling-modifier-label user-select-none" htmlFor="avg-selling-modifier-checkbox">Apply Avg. Price Modifier<a className="text-decoration-none ms-2" href="https://stardewvalleywiki.com/Farming#Crop_Quality_Frequency" target="_blank" rel="noreferrer">&#9432;</a></label>
-                  </div>
-                </div>
-              } */}
               <div className="form-group mt-2">
                 <label className="AddItem-fertilizer-label user-select-none">
                   Fertilizer:
                 </label>
                 <select
                   className="AddItem-fertilizer-select"
-                  value={fertilizerId}
+                  value={addItemState.fertilizerId}
                   onChange={(e) => fertilizerOnChange(e)}
                 >
                   <option value="">None</option>
@@ -535,31 +736,31 @@ const AddItem: React.FC<Props> = (props: Props) => {
                   })}
                 </select>
               </div>
-              {fertilizerId && (
+              {addItemState.fertilizerId && (
                 <div className="form-group mt-2 ms-3">
-                  {!isCustom && (
+                  {!addItemState.isCustom && (
                     <div>
                       <label className="user-select-none">Vendor:</label>
                       <select
                         className="AddItem-fertilizer-vendor-select"
-                        value={fertilizerCost}
+                        value={addItemState.fertilizerCost}
                         onChange={(e) => fertilizerVendorOnChange(e)}
                       >
                         <option value="0">No Vendor</option>
-                        {itemContext.itemRef[fertilizerId].vendors!.map(
-                          (vendor) => {
-                            return (
-                              <option key={vendor.id} value={vendor.cost}>
-                                {itemContext.itemRef[vendor.id].name} -{" "}
-                                {vendor.cost}g
-                              </option>
-                            );
-                          }
-                        )}
+                        {itemContext.itemRef[
+                          addItemState.fertilizerId
+                        ].vendors!.map((vendor) => {
+                          return (
+                            <option key={vendor.id} value={vendor.cost}>
+                              {itemContext.itemRef[vendor.id].name} -{" "}
+                              {vendor.cost}g
+                            </option>
+                          );
+                        })}
                       </select>
                     </div>
                   )}
-                  {isCustom && (
+                  {addItemState.isCustom && (
                     <div className="AddItem-fertilizer-vendor form-group mt-2">
                       <label className="user-select-none">
                         Fertilizer Cost:
@@ -571,7 +772,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                         max="1000"
                         size={6}
                         step="1"
-                        value={Number(fertilizerCost).toString()}
+                        value={addItemState.fertilizerCost}
                         onClick={() => selectInput}
                         onChange={(e) => fertilizerCostOnChange(e, true)}
                         onKeyDown={() => blurInput}
@@ -587,7 +788,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                 </label>
                 <select
                   className="AddItem-farming-buff-select"
-                  value={foodId}
+                  value={addItemState.foodId}
                   onChange={(e) => changeFoodId(e)}
                 >
                   <option data-farmingbuff="0" value="">
@@ -614,7 +815,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                 </label>
                 <select
                   className="AddItem-limit-season-select"
-                  value={cropLimitToSeason}
+                  value={addItemState.cropLimitToSeason}
                   onChange={(e) => cropLimitToSeasonOnChange(e)}
                 >
                   {seasonDropdownOptions.map((seasonObj) => {
@@ -632,18 +833,20 @@ const AddItem: React.FC<Props> = (props: Props) => {
                 </label>
                 <select
                   className="AddItem-crop-select"
-                  value={itemId}
+                  value={addItemState.itemId}
                   onChange={(e) => cropOnChange(e)}
                 >
                   <option value="">- Select A Crop -</option>
                   {itemContext.itemData.crops.map((item) => {
-                    if (cropLimitToSeason === "all")
+                    if (addItemState.cropLimitToSeason === "all")
                       return (
                         <option key={item.id} value={item.id}>
                           {item.name}
                         </option>
                       );
-                    else if (item.seasons.includes(cropLimitToSeason))
+                    else if (
+                      item.seasons.includes(addItemState.cropLimitToSeason)
+                    )
                       return (
                         <option key={item.id} value={item.id}>
                           {item.name}
@@ -653,29 +856,31 @@ const AddItem: React.FC<Props> = (props: Props) => {
                   })}
                 </select>
               </div>
-              {itemId && (
+              {addItemState.itemId && (
                 <div className="AddItem-selected-item-outer pt-4">
                   <div className="AddItem-selected-item-title-container border-top border-3 pt-2">
                     <img
-                      src={`./icons/crops/${itemContext.itemRef[itemId].icon}`}
-                      alt={itemContext.itemRef[itemId].icon}
+                      src={`/icons/crops/${
+                        itemContext.itemRef[addItemState.itemId].icon
+                      }`}
+                      alt={itemContext.itemRef[addItemState.itemId].icon}
                     />
                     <p className="d-inline fs-1 ms-2 align-bottom lh-1">
-                      {itemContext.itemRef[itemId].name}
+                      {itemContext.itemRef[addItemState.itemId].name}
                     </p>
                   </div>
                   <div className="mt-2">
-                    {!isCustom && (
+                    {!addItemState.isCustom && (
                       <span>
                         <label className="user-select-none">Seed Cost:</label>
                         <select
                           className="AddItem-vendor-select"
-                          value={seedCost}
+                          value={addItemState.seedCost}
                           onChange={(e) => seedVendorOnChange(e)}
                         >
                           <option value="0">No Vendor</option>
                           {itemContext.itemRef[
-                            itemContext.itemRef[itemId].seedId!
+                            itemContext.itemRef[addItemState.itemId].seedId!
                           ].vendors!.map((vendor) => {
                             return (
                               <option key={vendor.id} value={vendor.cost}>
@@ -687,7 +892,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                         </select>
                       </span>
                     )}
-                    {isCustom && (
+                    {addItemState.isCustom && (
                       <span>
                         <label className="user-select-none">Seed Cost:</label>
                         <input
@@ -697,7 +902,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           max="1000"
                           size={6}
                           step="1"
-                          value={Number(seedCost).toString()}
+                          value={addItemState.seedCost}
                           onClick={() => selectInput}
                           onChange={(e) => seedCostOnChange(e, true)}
                           onKeyDown={() => blurInput}
@@ -713,7 +918,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           <input
                             type="checkbox"
                             id="greenhouse-checkbox"
-                            checked={isGreenhouse}
+                            checked={addItemState.isGreenhouse}
                             onChange={() => toggleIsGreenhouse()}
                           />
                           <div className="slider round"></div>
@@ -727,13 +932,13 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       </label>
                       <img
                         className="AddItem-greenhouse-img"
-                        src="./icons/greenhouse.svg"
+                        src="/icons/greenhouse.svg"
                         alt="custom"
                       />
                     </div>
                   </div>
                   <div>
-                    {!isGreenhouse && (
+                    {!addItemState.isGreenhouse && (
                       <div>
                         <div className="form-group mt-2">
                           <label className="user-select-none">
@@ -741,18 +946,18 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           </label>
                           <select
                             className="AddItem-season-select"
-                            value={seasonStartIdx}
+                            value={addItemState.seasonStartIdx}
                             onChange={(e) => seasonOnChange(e)}
                           >
-                            {itemContext.itemRef[itemId].seasons.map(
-                              (season, idx) => {
-                                return (
-                                  <option key={season} value={idx}>
-                                    {season}
-                                  </option>
-                                );
-                              }
-                            )}
+                            {itemContext.itemRef[
+                              addItemState.itemId
+                            ].seasons.map((season, idx) => {
+                              return (
+                                <option key={season} value={idx}>
+                                  {season}
+                                </option>
+                              );
+                            })}
                           </select>
                         </div>
                         <div className="form-group mt-2">
@@ -765,7 +970,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             min="1"
                             max="28"
                             size={3}
-                            value={plantingDay}
+                            value={addItemState.plantingDay}
                             onClick={() => selectInput}
                             onKeyDown={() => blurInput}
                             onChange={(e) => plantingDayOnChange(e, true)}
@@ -774,7 +979,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                         </div>
                       </div>
                     )}
-                    {isCustom && (
+                    {addItemState.isCustom && (
                       <div className="mt-2">
                         <label className="user-select-none">
                           Normal Crop Sell Price:
@@ -786,7 +991,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           max="15000"
                           size={6}
                           step="1"
-                          value={Number(customSellPrice).toString()}
+                          value={addItemState.customSellPrice}
                           onClick={() => selectInput}
                           onChange={(e) => customSellPriceOnChange(e, true)}
                           onKeyDown={() => blurInput}
@@ -807,13 +1012,13 @@ const AddItem: React.FC<Props> = (props: Props) => {
             </div>
           )}
           {/* if an artisan good was selected */}
-          {selectedCategory === "goods" && (
+          {addItemState.selectedCategory === "goods" && (
             <div className="AddItem-goods-container">
               <div className="form-group">
                 <label>Select Good:</label>
                 <select
                   className="AddItem-selected"
-                  value={selectedGood}
+                  value={addItemState.selectedGood}
                   onChange={(e) => selectedGoodOnChange(e)}
                 >
                   {goodsDropdownOptions.map((option) => {
@@ -825,9 +1030,9 @@ const AddItem: React.FC<Props> = (props: Props) => {
                   })}
                 </select>
               </div>
-              {selectedGood && (
+              {addItemState.selectedGood && (
                 <div className="mt-2">
-                  {selectedGood === "wineJuice" && (
+                  {addItemState.selectedGood === "wineJuice" && (
                     <div className="AddItem-goods-container">
                       <div className="mt-2">
                         <div className="App-slider-container">
@@ -836,7 +1041,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                               <input
                                 type="checkbox"
                                 id="cask-checkbox"
-                                checked={isCask}
+                                checked={addItemState.isCask}
                                 onChange={(e) => toggleIsCask(e)}
                               />
                               <div className="slider round"></div>
@@ -850,21 +1055,21 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           </label>
                           <img
                             className="AddItem-custom-img"
-                            src="./icons/cask.svg"
+                            src="/icons/cask.svg"
                             alt="custom"
                           />
                         </div>
-                        {isCask && (
+                        {addItemState.isCask && (
                           <p className="AddItem-custom-subtitle">
                             <i>Limited to fruits/wine</i>
                           </p>
                         )}
                       </div>
-                      {isCask && (
+                      {addItemState.isCask && (
                         <div className="mt-2">
                           <label>Desired Quality:</label>
                           <select
-                            value={caskQuality}
+                            value={addItemState.caskQuality}
                             onChange={(e) => caskQualityOnChange(e)}
                           >
                             {qualityDropdownOptions.map((option) => {
@@ -885,7 +1090,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       <div className="mt-2">
                         <label>Limit To Season:</label>
                         <select
-                          value={wineJuiceLimitToSeason}
+                          value={addItemState.wineJuiceLimitToSeason}
                           onChange={(e) => wineJuiceLimitToSeasonOnChange(e)}
                         >
                           {seasonDropdownOptions.map((seasonObj) => {
@@ -903,17 +1108,17 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       <div className="mt-2">
                         <label>Select Produce:</label>
                         <select
-                          value={wineProduceId}
+                          value={addItemState.wineProduceId}
                           onChange={(e) => wineProduceIdOnChange(e)}
                         >
                           <option value="">- Select Produce -</option>
                           {itemContext.itemData.artisanFruitAndVegIds.map(
                             (id) => {
                               if (
-                                wineJuiceLimitToSeason === "all" &&
-                                ((isCask &&
+                                addItemState.wineJuiceLimitToSeason === "all" &&
+                                ((addItemState.isCask &&
                                   itemContext.itemRef[id].isWineable) ||
-                                  !isCask)
+                                  !addItemState.isCask)
                               )
                                 return (
                                   <option key={id} value={id}>
@@ -922,11 +1127,11 @@ const AddItem: React.FC<Props> = (props: Props) => {
                                 );
                               else if (
                                 itemContext.itemRef[id].seasons.includes(
-                                  wineJuiceLimitToSeason
+                                  addItemState.wineJuiceLimitToSeason
                                 ) &&
-                                ((isCask &&
+                                ((addItemState.isCask &&
                                   itemContext.itemRef[id].isWineable) ||
-                                  !isCask)
+                                  !addItemState.isCask)
                               )
                                 return (
                                   <option key={id} value={id}>
@@ -938,7 +1143,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           )}
                         </select>
                       </div>
-                      {isCustom && (
+                      {addItemState.isCustom && (
                         <div className="mt-2">
                           <label className="user-select-none">
                             Sell Price:
@@ -950,7 +1155,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             max="15000"
                             size={6}
                             step="1"
-                            value={Number(customSellPrice).toString()}
+                            value={addItemState.customSellPrice}
                             onClick={() => selectInput}
                             onChange={(e) => customSellPriceOnChange(e, true)}
                             onKeyDown={() => blurInput}
@@ -958,7 +1163,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           />
                         </div>
                       )}
-                      {wineProduceId && (
+                      {addItemState.wineProduceId && (
                         <button
                           className="AddItem-add-btn"
                           onClick={() => addWineOrJuice()}
@@ -968,12 +1173,12 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       )}
                     </div>
                   )}
-                  {selectedGood === "preserves" && (
+                  {addItemState.selectedGood === "preserves" && (
                     <div className="AddItem-goods-container">
                       <div>
                         <label>Limit To Season:</label>
                         <select
-                          value={preservesLimitToSeason}
+                          value={addItemState.preservesLimitToSeason}
                           onChange={(e) => preservesLimitToSeasonOnChange(e)}
                         >
                           {seasonDropdownOptions.map((seasonObj) => {
@@ -991,13 +1196,13 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       <div className="mt-2">
                         <label>Select Produce:</label>
                         <select
-                          value={preservesProduceId}
+                          value={addItemState.preservesProduceId}
                           onChange={(e) => preservesProduceIdOnChange(e)}
                         >
                           <option value="">- Select Produce -</option>
                           {itemContext.itemData.artisanFruitAndVegIds.map(
                             (id) => {
-                              if (preservesLimitToSeason === "all")
+                              if (addItemState.preservesLimitToSeason === "all")
                                 return (
                                   <option key={id} value={id}>
                                     {itemContext.itemRef[id].name}
@@ -1005,7 +1210,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                                 );
                               else if (
                                 itemContext.itemRef[id].seasons.includes(
-                                  preservesLimitToSeason
+                                  addItemState.preservesLimitToSeason
                                 )
                               )
                                 return (
@@ -1018,7 +1223,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           )}
                         </select>
                       </div>
-                      {isCustom && (
+                      {addItemState.isCustom && (
                         <div className="mt-2">
                           <label className="user-select-none">
                             Sell Price:
@@ -1030,7 +1235,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             max="15000"
                             size={6}
                             step="1"
-                            value={Number(customSellPrice).toString()}
+                            value={addItemState.customSellPrice}
                             onClick={() => selectInput}
                             onChange={(e) => customSellPriceOnChange(e, true)}
                             onKeyDown={() => blurInput}
@@ -1038,7 +1243,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           />
                         </div>
                       )}
-                      {preservesProduceId && (
+                      {addItemState.preservesProduceId && (
                         <button
                           className="AddItem-add-btn"
                           onClick={() => addPreserve()}
@@ -1048,11 +1253,11 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       )}
                     </div>
                   )}
-                  {selectedGood === "honey" && (
+                  {addItemState.selectedGood === "honey" && (
                     <div>
                       <label>Flower Type:</label>
                       <select
-                        value={honeyFlowerId}
+                        value={addItemState.honeyFlowerId}
                         onChange={(e) => honeyFlowerIdOnChange(e)}
                       >
                         <option value="">No Flower</option>
@@ -1068,12 +1273,12 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       </select>
                     </div>
                   )}
-                  {selectedGood === "cheese" && (
+                  {addItemState.selectedGood === "cheese" && (
                     <div>
                       <div>
                         <label>Type Of Milk:</label>
                         <select
-                          value={milkType}
+                          value={addItemState.milkType}
                           onChange={(e) => milkTypeOnChange(e)}
                         >
                           {milkTypeDropdownOptions.map((milk) => {
@@ -1093,7 +1298,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                                 className="form-check-input"
                                 type="checkbox"
                                 id="milk-size"
-                                checked={milkIsLarge}
+                                checked={addItemState.milkIsLarge}
                                 onChange={toggleMilkIsLarge}
                               />
                               <div className="slider round"></div>
@@ -1110,7 +1315,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                                 className="form-check-input"
                                 type="checkbox"
                                 id="cask-checkbox"
-                                checked={isCask}
+                                checked={addItemState.isCask}
                                 onChange={(e) => toggleIsCask(e)}
                               />
                               <div className="slider round"></div>
@@ -1119,18 +1324,18 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           <label htmlFor="cask-checkbox">Use Cask</label>
                           <img
                             className="AddItem-custom-img"
-                            src="./icons/cask.svg"
+                            src="/icons/cask.svg"
                             alt="custom"
                           />
                         </div>
                       </div>
-                      {isCask && (
+                      {addItemState.isCask && (
                         <div>
                           <div className="mt-2">
                             <label>Desired Quality:</label>
-                            {!milkIsLarge && (
+                            {!addItemState.milkIsLarge && (
                               <select
-                                value={caskQuality}
+                                value={addItemState.caskQuality}
                                 onChange={(e) => caskQualityOnChange(e)}
                               >
                                 {qualityDropdownOptions.map((option) => {
@@ -1147,9 +1352,9 @@ const AddItem: React.FC<Props> = (props: Props) => {
                                 })}
                               </select>
                             )}
-                            {milkIsLarge && (
+                            {addItemState.milkIsLarge && (
                               <select
-                                value={caskQuality}
+                                value={addItemState.caskQuality}
                                 onChange={(e) => caskQualityOnChange(e)}
                               >
                                 {qualityDropdownOptions.map((option) => {
@@ -1169,7 +1374,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           </div>
                         </div>
                       )}
-                      {isCustom && (
+                      {addItemState.isCustom && (
                         <div className="mt-2">
                           <label className="user-select-none">
                             Sell Price:
@@ -1181,7 +1386,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             max="15000"
                             size={6}
                             step="1"
-                            value={Number(customSellPrice).toString()}
+                            value={addItemState.customSellPrice}
                             onClick={() => selectInput}
                             onChange={(e) => customSellPriceOnChange(e, true)}
                             onKeyDown={() => blurInput}
@@ -1199,12 +1404,12 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       </div>
                     </div>
                   )}
-                  {selectedGood === "mayo" && (
+                  {addItemState.selectedGood === "mayo" && (
                     <div>
                       <div>
                         <label>Type Of Egg:</label>
                         <select
-                          value={eggType}
+                          value={addItemState.eggType}
                           onChange={(e) => eggTypeOnChange(e)}
                         >
                           {itemContext.itemData.animal_products.map(
@@ -1221,11 +1426,11 @@ const AddItem: React.FC<Props> = (props: Props) => {
                         </select>
                       </div>
                       {/* If Ostrich Egg, show 'quality' dropdown */}
-                      {eggType === "ostrich_egg" && (
+                      {addItemState.eggType === "ostrich_egg" && (
                         <div className="mt-2">
                           <label>Egg Quality:</label>
                           <select
-                            value={eggQuality}
+                            value={addItemState.eggQuality}
                             onChange={(e) => eggQualityOnChange(e)}
                           >
                             {qualityDropdownOptions.map((option) => {
@@ -1238,7 +1443,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           </select>
                         </div>
                       )}
-                      {isCustom && (
+                      {addItemState.isCustom && (
                         <div className="mt-2">
                           <label className="user-select-none">
                             Sell Price:
@@ -1250,7 +1455,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             max="15000"
                             size={6}
                             step="1"
-                            value={Number(customSellPrice).toString()}
+                            value={addItemState.customSellPrice}
                             onClick={() => selectInput}
                             onChange={(e) => customSellPriceOnChange(e, true)}
                             onKeyDown={() => blurInput}
@@ -1268,12 +1473,12 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       </div>
                     </div>
                   )}
-                  {selectedGood === "oil" && (
+                  {addItemState.selectedGood === "oil" && (
                     <div>
                       <div>
                         <label>Oil Type:</label>
                         <select
-                          value={oilType}
+                          value={addItemState.oilType}
                           onChange={(e) => oilTypeOnChange(e)}
                         >
                           {oilTypeDropdownOptions.map((oil) => {
@@ -1284,11 +1489,11 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             );
                           })}
                         </select>
-                        {oilType === "oil" && (
+                        {addItemState.oilType === "oil" && (
                           <div className="mt-2">
                             <label>Oil Ingredient:</label>
                             <select
-                              value={oilIngredientId}
+                              value={addItemState.oilIngredientId}
                               onChange={(e) => oilIngredientIdOnChange(e)}
                             >
                               {itemContext.itemRef["oil"].madeFrom.map(
@@ -1304,7 +1509,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           </div>
                         )}
                       </div>
-                      {isCustom && (
+                      {addItemState.isCustom && (
                         <div className="mt-2">
                           <label className="user-select-none">
                             Sell Price:
@@ -1316,7 +1521,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             max="15000"
                             size={6}
                             step="1"
-                            value={Number(customSellPrice).toString()}
+                            value={addItemState.customSellPrice}
                             onClick={() => selectInput}
                             onChange={(e) => customSellPriceOnChange(e, true)}
                             onKeyDown={() => blurInput}
@@ -1334,9 +1539,9 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       </div>
                     </div>
                   )}
-                  {(selectedGood === "pale_ale" ||
-                    selectedGood === "beer" ||
-                    selectedGood === "mead") && (
+                  {(addItemState.selectedGood === "pale_ale" ||
+                    addItemState.selectedGood === "beer" ||
+                    addItemState.selectedGood === "mead") && (
                     <div>
                       <div className="mt-2">
                         <div className="App-slider-container">
@@ -1346,7 +1551,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                                 className="form-check-input"
                                 type="checkbox"
                                 id="cask-checkbox"
-                                checked={isCask}
+                                checked={addItemState.isCask}
                                 onChange={(e) => toggleIsCask(e)}
                               />
                               <div className="slider round"></div>
@@ -1355,16 +1560,16 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           <label htmlFor="cask-checkbox">Use Cask</label>
                           <img
                             className="AddItem-custom-img"
-                            src="./icons/cask.svg"
+                            src="/icons/cask.svg"
                             alt="custom"
                           />
                         </div>
                       </div>
-                      {isCask && (
+                      {addItemState.isCask && (
                         <div className="mt-2">
                           <label>Desired Quality:</label>
                           <select
-                            value={caskQuality}
+                            value={addItemState.caskQuality}
                             onChange={(e) => caskQualityOnChange(e)}
                           >
                             {qualityDropdownOptions.map((option) => {
@@ -1385,15 +1590,15 @@ const AddItem: React.FC<Props> = (props: Props) => {
                     </div>
                   )}
                   {/* Show 'add good' button for shared templates */}
-                  {(selectedGood === "pale_ale" ||
-                    selectedGood === "beer" ||
-                    selectedGood === "mead" ||
-                    selectedGood === "coffee" ||
-                    selectedGood === "green_tea" ||
-                    selectedGood === "honey" ||
-                    selectedGood === "cloth") && (
+                  {(addItemState.selectedGood === "pale_ale" ||
+                    addItemState.selectedGood === "beer" ||
+                    addItemState.selectedGood === "mead" ||
+                    addItemState.selectedGood === "coffee" ||
+                    addItemState.selectedGood === "green_tea" ||
+                    addItemState.selectedGood === "honey" ||
+                    addItemState.selectedGood === "cloth") && (
                     <span>
-                      {isCustom && (
+                      {addItemState.isCustom && (
                         <div className="mt-2">
                           <label className="user-select-none">
                             Sell Price:
@@ -1405,7 +1610,7 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             max="15000"
                             size={6}
                             step="1"
-                            value={Number(customSellPrice).toString()}
+                            value={addItemState.customSellPrice}
                             onClick={() => selectInput}
                             onChange={(e) => customSellPriceOnChange(e, true)}
                             onKeyDown={() => blurInput}

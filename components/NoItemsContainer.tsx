@@ -13,9 +13,10 @@ const NoItemsContainer: React.FC<NoItemsContainerProps> = () => {
       </p>
       <p>
         By default, the app will auto calculate everything for you, however, you
-        can toggle on "Enter Values Myself" if you would like to enter your own
-        prices. This feature is for those that prefer self discovery and would
-        like to figure out prices on their own (with just a little help).
+        can toggle on &ldquo;Enter Values Myself&ldquo; if you would like to
+        enter your own prices. This feature is for those that prefer self
+        discovery and would like to figure out prices on their own (with just a
+        little help).
       </p>
       <p>
         Add some items and sort by specific criteria, or click on specific items

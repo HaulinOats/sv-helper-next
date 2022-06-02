@@ -36,7 +36,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
               <img
                 className="ItemModal-item-icon"
                 src={
-                  "./icons/misc/" + itemContext.itemRef[props.item.foodId].icon
+                  "/icons/misc/" + itemContext.itemRef[props.item.foodId].icon
                 }
                 alt="food"
               />
@@ -77,7 +77,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
             <div className="mb-1">
               <img
                 className="ItemModal-perks-icon"
-                src="./icons/general/36px-Tiller.webp"
+                src="/icons/general/36px-Tiller.webp"
                 alt="tiller"
               />
               <span className="ItemModal-perks-text">
@@ -92,7 +92,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
             <div>
               <img
                 className="ItemModal-perks-icon"
-                src="./icons/general/36px-Agriculturist.webp"
+                src="/icons/general/36px-Agriculturist.webp"
                 alt="agriculturist"
               />
               <span className="ItemModal-perks-text">
@@ -122,7 +122,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
               <img
                 className="ItemModal-fertilizer-icon ItemModal-item-icon"
                 src={
-                  "./icons/general/" +
+                  "/icons/general/" +
                   itemContext.itemRef[props.item.fertilizerId].icon
                 }
                 alt="fertilizer"
@@ -143,7 +143,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
             <div>
               <img
                 className="ItemModal-gold-icon"
-                src="./icons/general/27px-Gold.png"
+                src="/icons/general/27px-Gold.png"
                 alt="gold"
               />
               <span>{props.item.fertilizerCost}g</span>
@@ -165,7 +165,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
                   <img
                     className="ItemModal-seed-vendor-icon"
                     src={
-                      "./icons/general/" + itemContext.itemRef[vendor.id].icon
+                      "/icons/general/" + itemContext.itemRef[vendor.id].icon
                     }
                     alt="seed-vendor"
                   />
@@ -180,7 +180,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
                   </span>
                   <img
                     className="ItemModal-gold-icon"
-                    src="./icons/general/27px-Gold.png"
+                    src="/icons/general/27px-Gold.png"
                     alt="gold"
                   />
                   {vendor.cost}g
@@ -203,7 +203,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
             <img
               className="ItemModal-seed-icon"
               src={
-                "./icons/crops/" + itemContext.itemRef[itemRefObj.seedId!].icon
+                "/icons/crops/" + itemContext.itemRef[itemRefObj.seedId!].icon
               }
               alt="seed-icon"
             />
@@ -221,7 +221,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
               <img
                 className="ItemModal-season-icon"
                 src={
-                  "./icons/general/" +
+                  "/icons/general/" +
                   seasonIcons[
                     itemContext.itemRef[props.item.itemId].seasons[
                       props.item.seasonStartIdx
@@ -244,7 +244,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
             <span>
               <img
                 className="ItemModal-season-icon"
-                src="./icons/greenhouse.svg"
+                src="/icons/greenhouse.svg"
                 alt="greenhouse-icon"
               />
               <span>Greenhouse</span>
@@ -334,7 +334,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
               <span className="ItemModal-crop-price-text">
                 <img
                   className="ItemModal-gold-icon"
-                  src="./icons/general/27px-Gold.png"
+                  src="/icons/general/27px-Gold.png"
                   alt="gold"
                 />
                 {itemContext.itemRef[props.item.itemId].quality.normal.sellsFor}
@@ -350,7 +350,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
               <span className="ItemModal-crop-price-text">
                 <img
                   className="ItemModal-gold-icon"
-                  src="./icons/general/27px-Gold.png"
+                  src="/icons/general/27px-Gold.png"
                   alt="gold"
                 />
                 {itemContext.itemRef[props.item.itemId].quality.silver.sellsFor}
@@ -366,7 +366,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
               <span className="ItemModal-crop-price-text">
                 <img
                   className="ItemModal-gold-icon"
-                  src="./icons/general/27px-Gold.png"
+                  src="/icons/general/27px-Gold.png"
                   alt="gold"
                 />
                 {itemContext.itemRef[props.item.itemId].quality.gold.sellsFor}g
@@ -381,7 +381,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
               <span className="ItemModal-crop-price-text">
                 <img
                   className="ItemModal-gold-icon"
-                  src="./icons/general/27px-Gold.png"
+                  src="/icons/general/27px-Gold.png"
                   alt="gold"
                 />
                 {
@@ -408,7 +408,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
         <td>
           <img
             className="ItemModal-gold-icon"
-            src="./icons/general/27px-Gold.png"
+            src="/icons/general/27px-Gold.png"
             alt="gold"
           />
           <span>{props.item.normalSellPrice}g</span>
@@ -424,7 +424,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
         <td>
           <img
             className="ItemModal-gold-icon"
-            src="./icons/general/27px-Gold.png"
+            src="/icons/general/27px-Gold.png"
             alt="gold"
           />
           <span>{props.item.baseSellPricePerHarvest!.toFixed(2)}g</span>
@@ -469,7 +469,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
         <td>
           <img
             className="ItemModal-gold-icon"
-            src="./icons/general/27px-Gold.png"
+            src="/icons/general/27px-Gold.png"
             alt="gold"
           />
           <span>{props.item.sellPricePerHarvestRounded}g</span>
@@ -482,7 +482,7 @@ const CropTable: React.FC<CropTableProps> = (props) => {
         <td>
           <img
             className="ItemModal-gold-icon"
-            src="./icons/general/27px-Gold.png"
+            src="/icons/general/27px-Gold.png"
             alt="gold"
           />
           <span>{+props.item.avgGoldPerDay.toFixed(2)}g</span>

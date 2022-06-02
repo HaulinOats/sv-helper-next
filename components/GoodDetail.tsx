@@ -32,7 +32,7 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
               className="GoodDetail-main-icon"
               alt="crop-icon"
               src={
-                "./icons/goods/" + itemContext.itemRef[props.item.itemId].icon
+                "/icons/goods/" + itemContext.itemRef[props.item.itemId].icon
               }
             />
           </span>
@@ -47,7 +47,7 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
             <span className="d-inline-block">
               <img
                 className="GoodDetail-status-icon"
-                src="./icons/cask.svg"
+                src="/icons/cask.svg"
                 alt="cask"
               />
             </span>
@@ -56,7 +56,7 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
             <span className="d-inline-block">
               <img
                 className="GoodDetail-status-icon"
-                src="./icons/custom.svg"
+                src="/icons/custom.svg"
                 alt="custom"
               />
             </span>
@@ -77,7 +77,7 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
                 <img
                   className="ItemModal-icon"
                   src={
-                    "./icons/crops/" +
+                    "/icons/crops/" +
                     itemContext.itemRef[props.item.ingredientId].icon
                   }
                   alt="made-from"
@@ -90,7 +90,7 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
                 <img
                   className="ItemModal-icon"
                   src={
-                    "./icons/goods/" +
+                    "/icons/goods/" +
                     itemContext.itemRef[props.item.ingredientId].icon
                   }
                   alt="made-from"
@@ -117,7 +117,7 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
             <span>
               <img
                 className="GoodDetail-daily-gold-icon"
-                src="./icons/general/27px-Gold.png"
+                src="/icons/general/27px-Gold.png"
                 alt="gold"
               />
               {+props.item.basePrice!.toFixed(2)}g
@@ -128,7 +128,7 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
             <span>
               <img
                 className="GoodDetail-daily-gold-icon"
-                src="./icons/general/27px-Gold.png"
+                src="/icons/general/27px-Gold.png"
                 alt="gold"
               />
               {+props.item.sellPrice!.toFixed(2)}g
@@ -139,7 +139,7 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
             <span className="GoodDetail-gold-per-day-total">
               <img
                 className="GoodDetail-daily-gold-icon"
-                src="./icons/general/27px-Gold.png"
+                src="/icons/general/27px-Gold.png"
                 alt="gold"
               />
               {props.item.avgGoldPerDay

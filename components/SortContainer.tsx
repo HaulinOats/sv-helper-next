@@ -33,7 +33,7 @@ const SortContainer: FC<SortContainerProps> = (props) => {
           </select>
           <img
             className="SortContainer-reverse-sort-img"
-            src="./icons/reverse-sort.svg"
+            src="/icons/reverse-sort.svg"
             alt="reverse-sort"
             onClick={props.reverseSort}
           />
