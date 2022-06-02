@@ -82,7 +82,8 @@ const Home: NextPage = () => {
     setAppState({
       ...appState,
       selectedItemsArr:
-        getItemFromStorage("selectedItems") || appState.selectedItemsArr,
+        JSON.parse(localStorage.getItem("selectedItemsArr") as string) ||
+        appState.selectedItemsArr,
       sortByField: getItemFromStorage("sortByField") || appState.sortByField,
       farmingLevel: getItemFromStorage("farmingLevel") || appState.farmingLevel,
       hasTiller: getItemFromStorage("hasTiller") || appState.hasTiller,
