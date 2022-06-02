@@ -14,6 +14,7 @@ import { MayoCalculationItem } from "../types/MayoCalculationItem";
 import { OilCalculationItem } from "../types/OilCalculationItem.type";
 import NoItemsContainer from "../components/NoItemsContainer";
 import {
+  getCalculations,
   getCheeseCalculations,
   getCropCalculations,
   getGoodCalculations,
@@ -23,19 +24,7 @@ import {
   getWineJuiceCalculations,
 } from "../util/calculations";
 import { getItemFromStorage } from "../util/storage";
-
-interface AppState {
-  [key: string]: string | boolean | number | CalculationItem[];
-  selectedItemsArr: CalculationItem[];
-  addItemPanelIsShowing: boolean;
-  showInfoPanel: boolean;
-  sortByField: string;
-  farmingLevel: number;
-  hasTiller: boolean;
-  hasAgriculturist: boolean;
-  hasRancher: boolean;
-  hasArtisan: boolean;
-}
+import { AppState } from "../types/AppState.type";
 
 const perkDefaultValues = {
   farmingLevel: 0,
@@ -133,55 +122,9 @@ const Home: NextPage = () => {
   const updateCalculationsAndSort = (selectedItems: CalculationItem[]) => {
     let tempSelectedItemsArr: CalculationItem[] = [];
     selectedItems.forEach((item) => {
-      let calculationObj = {};
-      switch (item.displayCategory) {
-        case "crop":
-          calculationObj = getCropCalculations(
-            item as CropCalculationItem,
-            appState
-          );
-          break;
-        case "wineJuice":
-          calculationObj = getWineJuiceCalculations(
-            item as WineJuiceCalculationItem,
-            appState
-          );
-          break;
-        case "preserves":
-          calculationObj = getPreserveCalculations(
-            item as PreserveCalculationItem,
-            appState
-          );
-          break;
-        case "good":
-          calculationObj = getGoodCalculations(
-            item as GoodCalculationItem,
-            appState
-          );
-          break;
-        case "cheese":
-          calculationObj = getCheeseCalculations(
-            item as CheeseCalculationItem,
-            appState
-          );
-          break;
-        case "mayo":
-          calculationObj = getMayoCalculations(
-            item as MayoCalculationItem,
-            appState
-          );
-          break;
-        case "oil":
-          calculationObj = getOilCalculations(
-            item as OilCalculationItem,
-            appState
-          );
-          break;
-        default:
-      }
       tempSelectedItemsArr.push({
         ...item,
-        ...calculationObj,
+        ...getCalculations(item, appState),
       });
     });
 

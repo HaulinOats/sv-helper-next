@@ -1,5 +1,6 @@
 import soilModifiers from "../public/soil-modifiers.json";
 import { AppState } from "../types/AppState.type";
+import { CalculationItem } from "../types/CalculationItem.type";
 import { CheeseCalculationItem } from "../types/CheeseCalculationItem.type";
 import { CropCalculationItem } from "../types/CropCalculationItem.type";
 import { GoodCalculationItem } from "../types/GoodCalculationItem";
@@ -11,6 +12,29 @@ import { WineJuiceCalculationItem } from "../types/WineJuiceCalculationItem.type
 import createItemObjects from "./item";
 
 const { itemRef }: { itemRef: ItemRef } = createItemObjects();
+
+export const getCalculations = (item: CalculationItem, appState: AppState) => {
+  switch (item.displayCategory) {
+    case "crop":
+      return getCropCalculations(item as CropCalculationItem, appState);
+    case "wineJuice":
+      return getWineJuiceCalculations(
+        item as WineJuiceCalculationItem,
+        appState
+      );
+    case "preserves":
+      return getPreserveCalculations(item as PreserveCalculationItem, appState);
+    case "good":
+      return getGoodCalculations(item as GoodCalculationItem, appState);
+    case "cheese":
+      return getCheeseCalculations(item as CheeseCalculationItem, appState);
+    case "mayo":
+      return getMayoCalculations(item as MayoCalculationItem, appState);
+    case "oil":
+      return getOilCalculations(item as OilCalculationItem, appState);
+    default:
+  }
+};
 
 export const getCropCalculations = (
   item: CropCalculationItem,
