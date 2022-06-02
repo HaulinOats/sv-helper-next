@@ -43,9 +43,6 @@ export const createItemObjects = () => {
     return 0;
   });
 
-  // console.log("itemRef: ", itemRef);
-  // console.log("itemData: ", tempItemData);
-
   return {
     itemRef,
     itemData: tempItemData,

@@ -48,7 +48,6 @@ const Home: NextPage = () => {
   });
 
   useEffect(() => {
-    console.log("on mount...");
     //set dynamic background
     let currentDate = new Date();
     if (currentDate.getHours() > 7 && currentDate.getHours() < 19) {
@@ -79,26 +78,28 @@ const Home: NextPage = () => {
       purgeData = true;
     }
 
+    let tempSelectedItems: CalculationItem[] = [];
+    if (!purgeData && localStorage.getItem("selectedItemsArr")) {
+      tempSelectedItems = JSON.parse(
+        localStorage.getItem("selectedItemsArr") as string
+      ) as CalculationItem[];
+    }
+
     setAppState({
       ...appState,
-      selectedItemsArr: !purgeData
-        ? JSON.parse(localStorage.getItem("selectedItemsArr") as string)
-        : [] || appState.selectedItemsArr,
-      sortByField: getItemFromStorage("sortByField") || appState.sortByField,
-      farmingLevel: getItemFromStorage("farmingLevel") || appState.farmingLevel,
-      hasTiller: getItemFromStorage("hasTiller") || appState.hasTiller,
-      hasRancher: getItemFromStorage("hasRancher") || appState.hasRancher,
-      hasAgriculturist:
-        getItemFromStorage("hasAgriculturist") || appState.hasAgriculturist,
-      hasArtisan: getItemFromStorage("hasArtisan") || appState.hasArtisan,
+      sortByField: getItemFromStorage("sortByField"),
+      farmingLevel: getItemFromStorage("farmingLevel"),
+      hasTiller: getItemFromStorage("hasTiller"),
+      hasRancher: getItemFromStorage("hasRancher"),
+      hasAgriculturist: getItemFromStorage("hasAgriculturist"),
+      hasArtisan: getItemFromStorage("hasArtisan"),
+      selectedItemsArr: tempSelectedItems,
     });
   }, []);
 
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_ENV === "development") {
-      setTimeout(() => {
-        updateAppStorage();
-      }, 0);
+      setTimeout(updateAppStorage, 0);
     } else {
       updateAppStorage();
     }
@@ -106,7 +107,7 @@ const Home: NextPage = () => {
 
   const updateAppStorage = () => {
     localStorage.setItem(
-      "seletedItemsArr",
+      "selectedItemsArr",
       JSON.stringify(appState.selectedItemsArr)
     );
     localStorage.setItem("sortByField", appState.sortByField);
@@ -117,10 +118,7 @@ const Home: NextPage = () => {
     localStorage.setItem("hasArtisan", String(appState.hasArtisan));
   };
 
-  const updateCalculationsAndSort = (
-    selectedItems: CalculationItem[],
-    hideAddItemPanel?: boolean
-  ) => {
+  const updateCalculationsAndSort = (selectedItems: CalculationItem[]) => {
     let tempSelectedItemsArr: CalculationItem[] = [];
     selectedItems.forEach((item) => {
       let calculationObj = {};
@@ -185,7 +183,7 @@ const Home: NextPage = () => {
     setAppState({
       ...appState,
       selectedItemsArr: tempSelectedItemsArr,
-      addItemPanelIsShowing: hideAddItemPanel ? hideAddItemPanel : false,
+      addItemPanelIsShowing: false,
     });
   };
 
