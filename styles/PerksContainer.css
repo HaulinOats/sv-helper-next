@@ -1,15 +1,19 @@
 .PerksContainer {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
 }
 .PerksContainer h2 {
   display: inline-block;
 }
+.PerksContainer-single-perk-outer {
+  display: grid;
+  grid-auto-flow: column;
+}
 .PerksContainer-single-perk {
   font-size: 0.8rem;
-}
-.PerksContainer-perks-icon {
   width: 17px;
   height: 17px;
+  margin: 2px;
 }

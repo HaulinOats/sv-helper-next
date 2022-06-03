@@ -1,21 +1,19 @@
-.SortContainer {
-
-}
 .SortContainer-sort-container {
-  display:flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   background: burlywood;
   padding: 5px;
   width: fit-content;
   margin-bottom: 5px;
   border-radius: 5px;
-  font-size:.8rem;
+  font-size: 0.8rem;
 }
 .SortContainer-sort-by-dropdown {
   border-radius: 5px;
 }
 .SortContainer-reverse-sort-img {
-  width:25px;
-  margin-left:5px;
-  cursor:pointer;
+  width: 25px;
+  margin-left: 5px;
+  cursor: pointer;
 }

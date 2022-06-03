@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { FC, useContext } from "react";
 import { ItemContext } from "../pages/_app";
 import { CropCalculationItem } from "../types/CropCalculationItem.type";
@@ -22,27 +23,34 @@ const CropDetail: FC<CropDetailProps> = (props) => {
     >
       <div className="CropDetail-top-name-level-container">
         <span className="CropDetail-name-icon-container">
-          <img
-            className="CropDetail-main-icon"
-            alt="crop-icon"
-            src={"/icons/crops/" + itemContext.itemRef[props.item.itemId].icon}
-          />
+          <span className="CropDetail-main-icon">
+            <Image
+              width="36"
+              height="36"
+              alt="crop-icon"
+              src={
+                "/icons/crops/" + itemContext.itemRef[props.item.itemId].icon
+              }
+            />
+          </span>
           <span className="CropDetail-main-title">{props.item.name}</span>
         </span>
         <div>
           {props.item.isGreenhouse && (
-            <span className="d-inline-block">
-              <img
-                className="CropDetail-status-icon CropDetail-status-greenhouse-icon"
+            <span className="CropDetail-status-icon CropDetail-status-greenhouse-icon">
+              <Image
+                width="36"
+                height="36"
                 src="/icons/greenhouse.svg"
                 alt="greenhouse"
               />
             </span>
           )}
           {props.item.isCustom && (
-            <span className="d-inline-block">
-              <img
-                className="CropDetail-status-icon"
+            <span className="CropDetail-status-icon">
+              <Image
+                width="36"
+                height="36"
                 src="/icons/custom.svg"
                 alt="custom"
               />
@@ -52,22 +60,26 @@ const CropDetail: FC<CropDetailProps> = (props) => {
       </div>
       <div className="CropDetail-main-container">
         <div className="CropDetail-main-container-left">
-          <span className="CropDetail-season-container CropDetail-bottom-container-row d-flex justify-content-between">
+          <span className="CropDetail-season-container CropDetail-bottom-container-row">
             <span>Season/Day:</span>
             <span>
               {itemContext.itemRef[props.item.itemId].seasons[0] !== "none" &&
               !props.item.isGreenhouse ? (
-                <div>
-                  <img
-                    className="CropDetail-season-icon"
-                    src={
-                      "/icons/general/" +
-                      seasonIcons[
-                        itemRefObj.seasons[props.item.seasonStartIdx!]
-                      ]
-                    }
-                    alt="season"
-                  />
+                <div className="CropDetail-season-row">
+                  <span className="CropDetail-season-icon">
+                    <Image
+                      width="36"
+                      height="36"
+                      src={
+                        "/icons/general/" +
+                        seasonIcons[
+                          itemRefObj.seasons[props.item.seasonStartIdx!]
+                        ]
+                      }
+                      alt="season"
+                    />
+                  </span>
+
                   <span>
                     {
                       itemContext.itemRef[props.item.itemId].seasons[
@@ -82,18 +94,22 @@ const CropDetail: FC<CropDetailProps> = (props) => {
               )}
             </span>
           </span>
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between">
+          <span className="CropDetail-bottom-container-row">
             <span>Food:</span>
             <span>
               {props.item.foodId ? (
-                <div>
-                  <img
-                    src={
-                      "/icons/misc/" +
-                      itemContext.itemRef[props.item.foodId].icon
-                    }
-                    alt="food"
-                  />
+                <div className="CropDetail-right-grid">
+                  <span className="CropDetail-icon">
+                    <Image
+                      width="36"
+                      height="36"
+                      src={
+                        "/icons/misc/" +
+                        itemContext.itemRef[props.item.foodId].icon
+                      }
+                      alt="food"
+                    />
+                  </span>
                   <span>{itemContext.itemRef[props.item.foodId].name}</span>
                 </div>
               ) : (
@@ -101,29 +117,38 @@ const CropDetail: FC<CropDetailProps> = (props) => {
               )}
             </span>
           </span>
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between">
+          <span className="CropDetail-bottom-container-row">
             <span>Seed Cost:</span>
-            <span>
-              <img
-                src={
-                  "/icons/crops/" + itemContext.itemRef[itemRefObj.seedId!].icon
-                }
-                alt="seed-icon"
-              />
-              <span>{props.item.seedCost}g</span>
-            </span>
-          </span>
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between no-border">
-            <span>Fertilizer:</span>
-            <span>
-              {props.item.fertilizerId && (
-                <img
+            <span className="CropDetail-right-grid">
+              <span className="CropDetail-icon">
+                <Image
+                  width="36"
+                  height="36"
                   src={
-                    "/icons/general/" +
-                    itemContext.itemRef[props.item.fertilizerId].icon
+                    "/icons/crops/" +
+                    itemContext.itemRef[itemRefObj.seedId!].icon
                   }
                   alt="seed-icon"
                 />
+              </span>
+              <span>{props.item.seedCost}g</span>
+            </span>
+          </span>
+          <span className="CropDetail-bottom-container-row no-border">
+            <span>Fertilizer:</span>
+            <span className="CropDetail-right-grid">
+              {props.item.fertilizerId && (
+                <span className="CropDetail-icon">
+                  <Image
+                    width="36"
+                    height="36"
+                    src={
+                      "/icons/general/" +
+                      itemContext.itemRef[props.item.fertilizerId].icon
+                    }
+                    alt="seed-icon"
+                  />
+                </span>
               )}
               <span>
                 {props.item.fertilizerCost
@@ -134,19 +159,19 @@ const CropDetail: FC<CropDetailProps> = (props) => {
           </span>
         </div>
         <div className="CropDetail-main-container-middle d-none d-sm-inline-block">
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between">
+          <span className="CropDetail-bottom-container-row">
             <span>Grow Time Modifier:</span>
             <span>{props.item.growTimeMultiplier}</span>
           </span>
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between">
+          <span className="CropDetail-bottom-container-row">
             <span>Sell Price Modifier:</span>
             <span>{props.item.perkSellPriceMultiplier}</span>
           </span>
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between">
+          <span className="CropDetail-bottom-container-row">
             <span>Maturity Days:</span>
             <span>{props.item.maturityDaysModifiedRounded} Days</span>
           </span>
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between no-border">
+          <span className="CropDetail-bottom-container-row no-border">
             <span>Regrowth Days:</span>
             <span>
               {props.item.regrowthDaysModifiedRounded
@@ -156,22 +181,25 @@ const CropDetail: FC<CropDetailProps> = (props) => {
           </span>
         </div>
         <div className="CropDetail-main-container-right">
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between">
+          <span className="CropDetail-bottom-container-row">
             <span>Total Days:</span>
             <span>{props.item.harvestDays}</span>
           </span>
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between">
+          <span className="CropDetail-bottom-container-row">
             <span>Total Harvests:</span>
             <span>{props.item.maxHarvestsRounded}</span>
           </span>
-          <span className="CropDetail-bottom-container-row d-flex justify-content-between no-border">
+          <span className="CropDetail-bottom-container-row no-border">
             <span className="">Avg Sell Price:</span>
-            <span>
-              <img
-                className="CropDetail-daily-gold-icon"
-                src="/icons/general/27px-Gold.png"
-                alt="gold"
-              />
+            <span className="CropDetail-right-grid">
+              <span className="CropDetail-daily-gold-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/27px-Gold.png"
+                  alt="gold"
+                />
+              </span>
               {props.item.sellPricePerHarvest
                 ? +props.item.sellPricePerHarvest.toFixed(2)
                 : "0"}
@@ -180,12 +208,15 @@ const CropDetail: FC<CropDetailProps> = (props) => {
           </span>
           <span className="CropDetail-gold-per-day">
             <span>Gold/Day:</span>
-            <span className="CropDetail-gold-per-day-total">
-              <img
-                className="CropDetail-daily-gold-icon"
-                src="/icons/general/27px-Gold.png"
-                alt="gold"
-              />
+            <span className="CropDetail-right-grid">
+              <span className="CropDetail-daily-gold-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/27px-Gold.png"
+                  alt="gold"
+                />
+              </span>
               {props.item.avgGoldPerDay
                 ? +props.item.avgGoldPerDay.toFixed(2) + "g"
                 : "0"}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { ChangeEvent, FC, useContext, useState } from "react";
 import { PerksContext } from "../pages";
 
@@ -140,11 +141,14 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
                   <div className="slider round"></div>
                 </label>
               </div>
-              <img
-                className="LevelPerksSelection-perk-icon align-middle"
-                src="/icons/general/36px-Tiller.webp"
-                alt="tiller"
-              />
+              <span className="LevelPerksSelection-perk-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/36px-Tiller.webp"
+                  alt="tiller"
+                />
+              </span>
               <label
                 className="LevelPerksSelection-checkbox-label form-check-label ms-2 user-select-none"
                 htmlFor="tiller-checkbox"
@@ -166,11 +170,14 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
                   <div className="slider round"></div>
                 </label>
               </div>
-              <img
-                className="LevelPerksSelection-perk-icon align-middle"
-                src="/icons/general/36px-Rancher.png"
-                alt="rancher"
-              />
+              <span className="LevelPerksSelection-perk-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/36px-Rancher.png"
+                  alt="rancher"
+                />
+              </span>
               <label
                 className="LevelPerksSelection-checkbox-label form-check-label ms-2 user-select-none"
                 htmlFor="rancher-checkbox"
@@ -196,11 +203,14 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
                   <div className="slider round"></div>
                 </label>
               </div>
-              <img
-                className="LevelPerksSelection-perk-icon align-middle"
-                src="/icons/general/36px-Agriculturist.webp"
-                alt="agriculturist"
-              />
+              <span className="LevelPerksSelection-perk-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/36px-Agriculturist.webp"
+                  alt="agriculturist"
+                />
+              </span>
               <label
                 className="LevelPerksSelection-checkbox-label form-check-label ms-2 user-select-none"
                 htmlFor="agriculturist-checkbox"
@@ -222,11 +232,14 @@ const LevelPerksSelection: FC<LevelPerksSelectionProps> = (props) => {
                   <div className="slider round"></div>
                 </label>
               </div>
-              <img
-                className="LevelPerksSelection-perk-icon align-middle"
-                src="/icons/general/36px-Artisan.webp"
-                alt="artisan"
-              />
+              <span className="LevelPerksSelection-perk-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/36px-Artisan.webp"
+                  alt="artisan"
+                />
+              </span>
               <label
                 className="LevelPerksSelection-checkbox-label form-check-label ms-2 user-select-none"
                 htmlFor="artisan-checkbox"

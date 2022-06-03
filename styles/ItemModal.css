@@ -11,7 +11,7 @@
   top: 7%;
   left: 6%;
   width: 88%;
-  height: 88%;
+  max-height: 88%;
   border-radius: 3px;
   padding: 10px;
   background: darkslategray;
@@ -65,7 +65,8 @@
   -webkit-text-stroke-width: 0.03rem;
 }
 .ItemModal-title-container {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   justify-content: space-between;
 }
@@ -74,14 +75,13 @@
   text-transform: capitalize;
 }
 .ItemModal-title-container span {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
 }
 .ItemModal-status-icon {
   width: 25px;
   margin-left: 5px;
-}
-.ItemModal-status-greenhouse-icon {
 }
 .ItemModal a {
   color: maroon;
@@ -119,11 +119,16 @@
 }
 .ItemModal-table a {
   text-decoration: none;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
 }
 .ItemModal-table td {
   width: 35%;
 }
 /* .ItemModal-table */
+.ItemModal-icon,
 .ItemModal-item-icon,
 .ItemModal-perks-icon,
 .ItemModal-seed-icon {
@@ -131,18 +136,25 @@
   margin-right: 4px;
 }
 .ItemModal-artisan-equipment-icon {
-  height: 28px;
+  width: 28px;
   margin-right: 6px;
 }
 .ItemModal-perks-text {
   font-size: 0.7rem;
 }
+.ItemModal-icon,
 .ItemModal-seed-vendor-icon {
   width: 20px;
 }
 .ItemModal-gold-icon {
   width: 15px;
   margin-right: 3px;
+  display: grid;
+}
+.ItemModal-gold-icon-large {
+  width: 22px;
+  margin-right: 3px;
+  display: grid;
 }
 .ItemModal-season-icon {
   width: 20px;
@@ -151,23 +163,43 @@
 .ItemModal-planting-day {
   text-transform: capitalize;
 }
-.ItemModal-crop-price-icon-container {
+.ItemModal-crop-price {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: start;
+}
+.ItemModal-crop-price-star-container {
   display: inline-block;
   position: relative;
 }
-.ItemModal-crop-price-icon {
-}
 .ItemModal-crop-price-star {
   font-size: 1rem;
-}
-.ItemModal-crop-price-star-normal {
-}
-.ItemModal-icon {
-  width: 25px;
-  margin-right: 4px;
 }
 .ItemModal-gold-per-day-container {
   background: goldenrod;
   font-weight: bold;
   font-size: 1.2rem;
+}
+.ItemModal-seed-vendor,
+.ItemModal-right-row {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+}
+.ItemModal-right-container {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+}
+.ItemModal-right-container-row {
+  display: grid;
+  grid-auto-flow: row;
+}
+.ItemModal-crop-price-gold-container {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
 }

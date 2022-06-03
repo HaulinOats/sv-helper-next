@@ -5,24 +5,8 @@ import InfoPanel from "../components/InfoPanel";
 import ItemContainer from "../components/ItemContainer";
 import PerksContainer from "../components/PerksContainer";
 import { CalculationItem } from "../types/CalculationItem.type";
-import { CropCalculationItem } from "../types/CropCalculationItem.type";
-import { GoodCalculationItem } from "../types/GoodCalculationItem";
-import { WineJuiceCalculationItem } from "../types/WineJuiceCalculationItem.type";
-import { PreserveCalculationItem } from "../types/PreserveCalculationItem";
-import { CheeseCalculationItem } from "../types/CheeseCalculationItem.type";
-import { MayoCalculationItem } from "../types/MayoCalculationItem";
-import { OilCalculationItem } from "../types/OilCalculationItem.type";
 import NoItemsContainer from "../components/NoItemsContainer";
-import {
-  getCalculations,
-  getCheeseCalculations,
-  getCropCalculations,
-  getGoodCalculations,
-  getMayoCalculations,
-  getOilCalculations,
-  getPreserveCalculations,
-  getWineJuiceCalculations,
-} from "../util/calculations";
+import { getCalculations } from "../util/calculations";
 import { getItemFromStorage } from "../util/storage";
 import { AppState } from "../types/AppState.type";
 
@@ -164,7 +148,10 @@ const Home: NextPage = () => {
   const deleteItem = (idx: number) => {
     let itemsArr = appState.selectedItemsArr;
     itemsArr.splice(idx, 1);
-    updateCalculationsAndSort(itemsArr);
+    setAppState({
+      ...appState,
+      selectedItemsArr: itemsArr,
+    });
   };
 
   const sortByFieldName = (fieldName: string) => {
@@ -177,14 +164,17 @@ const Home: NextPage = () => {
     setAppState({
       ...appState,
       sortByField: fieldName,
+      selectedItemsArr: itemsArr,
     });
-    updateCalculationsAndSort(itemsArr);
   };
 
   const reverseSort = () => {
     let itemsArr = appState.selectedItemsArr;
     itemsArr.reverse();
-    updateCalculationsAndSort(itemsArr);
+    setAppState({
+      ...appState,
+      selectedItemsArr: itemsArr,
+    });
   };
 
   const openInfoPanel = () => {
@@ -196,7 +186,10 @@ const Home: NextPage = () => {
   };
 
   const deleteAll = () => {
-    updateCalculationsAndSort([]);
+    setAppState({
+      ...appState,
+      selectedItemsArr: [],
+    });
   };
 
   const addItem = (item: CalculationItem) => {

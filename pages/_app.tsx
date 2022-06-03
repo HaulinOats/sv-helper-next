@@ -29,10 +29,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ItemContext.Provider value={{ itemData, itemRef }}>
       <Component {...pageProps} />
-      <Script
-        strategy="beforeInteractive"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-      />
     </ItemContext.Provider>
   );
 }

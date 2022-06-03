@@ -1,45 +1,47 @@
 .GoodDetail {
-  position:relative;
-  padding:7px;
-  margin-bottom:4px;
+  position: relative;
+  padding: 7px;
+  margin-bottom: 4px;
   border-radius: 5px;
   border: solid 3px brown;
-  cursor:pointer;
-  user-select:none;
+  cursor: pointer;
+  user-select: none;
 }
 .GoodDetail-name-icon-container {
-  display:flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
 }
 .GoodDetail-icon-container {
-  position:relative;
+  position: relative;
 }
 .GoodDetail-status-icon {
-  width:22px;
-  margin-left:5px;
+  width: 22px;
+  margin-left: 5px;
 }
 .GoodDetail-name-quality-star {
   position: absolute;
-  width:0;
-  height:0;
+  width: 0;
+  height: 0;
   top: -5px;
   left: -3px;
   font-size: 15px;
   z-index: 2;
   -webkit-text-stroke: black;
-  -webkit-text-stroke-width: .03rem;
+  -webkit-text-stroke-width: 0.03rem;
 }
 .GoodDetail-top-name-level-container {
   padding-bottom: 4px;
   margin-bottom: 4px;
-  display:flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
-  position:relative;
+  position: relative;
 }
 .GoodDetail-main-icon {
-  width:40px;
-  margin-right:4px;
+  width: 40px;
+  margin-right: 4px;
   filter: drop-shadow(-2px 4px 1px #666666);
 }
 .GoodDetail-main-title {
@@ -49,63 +51,62 @@
   color: white;
 }
 .GoodDetail-top-name-level-container a {
-  display:flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   text-decoration: none;
 }
 .GoodDetail-main-container {
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
 }
 .GoodDetail-main-container-left {
   background: rgb(255 255 255 / 45%);
   /* width:55%; */
   margin-right: 1%;
-  padding:5px;
+  padding: 5px;
   box-shadow: -2px 2px 4px -2px black;
-  flex-grow:1;
 }
 .GoodDetail-main-container-middle {
   background: rgb(255 255 255 / 45%);
   /* width:55%; */
   margin: 0;
-  padding:5px;
+  padding: 5px;
   box-shadow: -2px 2px 4px -2px black;
-  flex-grow:1;
 }
 .GoodDetail-main-container-right {
   background: rgb(255 255 255 / 45%);
   position: relative;
   /* width:43%; */
   margin-left: 1%;
-  padding:5px;
+  padding: 5px;
   box-shadow: -2px 2px 4px -2px black;
-  flex-grow:1;
 }
 .GoodDetail-season {
   text-transform: capitalize;
 }
 .GoodDetail-bottom-container-row {
-  display:flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: space-between;
-  align-items:center;
-  border-bottom:dotted 1px black;
-  font-size:0.7rem;
+  align-items: center;
+  border-bottom: dotted 1px black;
+  font-size: 0.7rem;
 }
-.GoodDetail-bottom-container-row img{
-  width:15px;
-  margin-right:3px;
-  margin-bottom:2px;
+.GoodDetail-bottom-container-row img {
+  width: 15px;
+  margin-right: 3px;
+  margin-bottom: 2px;
 }
 .GoodDetail-gold-per-day {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: space-between;
   font-size: 0.8rem;
   position: absolute;
   bottom: 0;
-  left:0;
+  left: 0;
   width: 100%;
   font-weight: bold;
   align-items: center;
@@ -113,8 +114,18 @@
   padding: 1px 2px;
 }
 .GoodDetail-daily-gold-icon {
-  width:15px;
+  width: 15px;
+  height: 15px;
 }
 .GoodDetail-gold-per-day-total {
-  font-size:.8rem;
+  font-size: 0.8rem;
+}
+.GoodDetail-icon {
+  width: 20px;
+  margin-right: 4px;
+}
+.GoodDetail-right-grid {
+  display: flex;
+  grid-auto-flow: column;
+  align-items: center;
 }

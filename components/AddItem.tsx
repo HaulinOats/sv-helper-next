@@ -10,6 +10,7 @@ import {
   seasonDropdownOptions,
 } from "../util/helpers";
 import { ItemContext } from "../pages/_app";
+import Image from "next/image";
 
 interface AddItemState {
   fertilizerId: string | undefined;
@@ -715,11 +716,14 @@ const AddItem: React.FC<Props> = (props: Props) => {
             </label>
           </div>
           <label htmlFor="is-custom">Enter Values Myself</label>
-          <img
-            className="AddItem-custom-img"
-            src="/icons/custom.svg"
-            alt="custom"
-          />
+          <span className="AddItem-custom-img">
+            <Image
+              width="36"
+              height="36"
+              src="/icons/custom.svg"
+              alt="custom"
+            />
+          </span>
         </div>
         {addItemState.isCustom && (
           <p className="AddItem-custom-subtitle">
@@ -886,14 +890,18 @@ const AddItem: React.FC<Props> = (props: Props) => {
                 </select>
               </div>
               {addItemState.itemId && (
-                <div className="AddItem-selected-item-outer pt-4">
-                  <div className="AddItem-selected-item-title-container border-top border-3 pt-2">
-                    <img
-                      src={`/icons/crops/${
-                        itemContext.itemRef[addItemState.itemId].icon
-                      }`}
-                      alt={itemContext.itemRef[addItemState.itemId].icon}
-                    />
+                <div className="AddItem-selected-item-outer">
+                  <div className="AddItem-selected-item-title-container">
+                    <span className="AddItem-selected-icon">
+                      <Image
+                        width="36"
+                        height="36"
+                        src={`/icons/crops/${
+                          itemContext.itemRef[addItemState.itemId].icon
+                        }`}
+                        alt={itemContext.itemRef[addItemState.itemId].icon}
+                      />
+                    </span>
                     <p className="d-inline fs-1 ms-2 align-bottom lh-1">
                       {itemContext.itemRef[addItemState.itemId].name}
                     </p>
@@ -959,11 +967,14 @@ const AddItem: React.FC<Props> = (props: Props) => {
                       >
                         Using Greenhouse
                       </label>
-                      <img
-                        className="AddItem-greenhouse-img"
-                        src="/icons/greenhouse.svg"
-                        alt="custom"
-                      />
+                      <span className="AddItem-greenhouse-img">
+                        <Image
+                          width="36"
+                          height="36"
+                          src="/icons/greenhouse.svg"
+                          alt="custom"
+                        />
+                      </span>
                     </div>
                   </div>
                   <div>
@@ -1082,11 +1093,14 @@ const AddItem: React.FC<Props> = (props: Props) => {
                           >
                             Use Cask
                           </label>
-                          <img
-                            className="AddItem-custom-img"
-                            src="/icons/cask.svg"
-                            alt="custom"
-                          />
+                          <span className="AddItem-custom-img">
+                            <Image
+                              width="36"
+                              height="36"
+                              src="/icons/cask.svg"
+                              alt="custom"
+                            />
+                          </span>
                         </div>
                         {addItemState.isCask && (
                           <p className="AddItem-custom-subtitle">
@@ -1351,11 +1365,14 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             </label>
                           </div>
                           <label htmlFor="cask-checkbox">Use Cask</label>
-                          <img
-                            className="AddItem-custom-img"
-                            src="/icons/cask.svg"
-                            alt="custom"
-                          />
+                          <span className="AddItem-custom-img">
+                            <Image
+                              width="36"
+                              height="36"
+                              src="/icons/cask.svg"
+                              alt="custom"
+                            />
+                          </span>
                         </div>
                       </div>
                       {addItemState.isCask && (
@@ -1587,11 +1604,14 @@ const AddItem: React.FC<Props> = (props: Props) => {
                             </label>
                           </div>
                           <label htmlFor="cask-checkbox">Use Cask</label>
-                          <img
-                            className="AddItem-custom-img"
-                            src="/icons/cask.svg"
-                            alt="custom"
-                          />
+                          <span className="AddItem-custom-img">
+                            <Image
+                              width="36"
+                              height="36"
+                              src="/icons/cask.svg"
+                              alt="custom"
+                            />
+                          </span>
                         </div>
                       </div>
                       {addItemState.isCask && (

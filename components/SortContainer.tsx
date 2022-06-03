@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { FC } from "react";
 
 interface SortContainerProps {
@@ -31,12 +32,15 @@ const SortContainer: FC<SortContainerProps> = (props) => {
             <option value="fertilizerCost">Fertilizer Cost (Crops)</option>
             <option value="maxHarvestsRounded">Total Harvests (Crops)</option>
           </select>
-          <img
-            className="SortContainer-reverse-sort-img"
-            src="/icons/reverse-sort.svg"
-            alt="reverse-sort"
-            onClick={props.reverseSort}
-          />
+          <span className="SortContainer-reverse-sort-img">
+            <Image
+              width="36"
+              height="36"
+              src="/icons/reverse-sort.svg"
+              alt="reverse-sort"
+              onClick={props.reverseSort}
+            />
+          </span>
         </span>
       </div>
     </div>

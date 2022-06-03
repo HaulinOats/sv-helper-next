@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useContext } from "react";
 import { ItemContext } from "../../pages/_app";
 import { CalculationItem } from "../../types/CalculationItem.type";
@@ -13,7 +14,9 @@ const App: React.FC<TitleContainerProps> = (props) => {
   if (props.item.displayCategory === "crop") {
     titleElement = (
       <span className="ItemModal-main-icon-container">
-        <img
+        <Image
+          width="36"
+          height="36"
           src={"/icons/crops/" + itemContext.itemRef[props.item.itemId].icon}
           alt={itemContext.itemRef[props.item.itemId].icon}
         />
@@ -33,7 +36,9 @@ const App: React.FC<TitleContainerProps> = (props) => {
               &#9733;
             </span>
           )}
-          <img
+          <Image
+            width="36"
+            height="36"
             src={"/icons/goods/" + itemContext.itemRef[props.item.itemId].icon}
             alt={itemContext.itemRef[props.item.itemId].icon}
           />
@@ -59,7 +64,9 @@ const App: React.FC<TitleContainerProps> = (props) => {
       <div className="d-flex">
         {props.item.isGreenhouse && (
           <span>
-            <img
+            <Image
+              width="36"
+              height="36"
               className="ItemModal-status-icon ItemModal-status-greenhouse-icon"
               src="/icons/greenhouse.svg"
               alt="greenhouse"
@@ -68,7 +75,9 @@ const App: React.FC<TitleContainerProps> = (props) => {
         )}
         {props.item.isCask && (
           <span>
-            <img
+            <Image
+              width="36"
+              height="36"
               className="ItemModal-status-icon"
               src="/icons/cask.svg"
               alt="cask"
@@ -77,7 +86,9 @@ const App: React.FC<TitleContainerProps> = (props) => {
         )}
         {props.item.isCustom && (
           <span>
-            <img
+            <Image
+              width="36"
+              height="36"
               className="ItemModal-status-icon"
               src="/icons/custom.svg"
               alt="custom"

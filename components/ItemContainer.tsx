@@ -6,6 +6,7 @@ import ItemModal from "./ItemModal";
 import { CropCalculationItem } from "../types/CropCalculationItem.type";
 import { GoodCalculationItem } from "../types/GoodCalculationItem";
 import { CalculationItem } from "../types/CalculationItem.type";
+import Image from "next/image";
 
 interface ItemContainerProps {
   items: CalculationItem[];
@@ -81,11 +82,14 @@ const ItemContainer: FC<ItemContainerProps> = (props) => {
             } else return "";
           })}
           <button className="my-2 App-delete-all" onClick={props.deleteAll}>
-            <img
-              className="App-delete-all-icon"
-              src="/icons/general/trash-can.svg"
-              alt="trash"
-            />
+            <span className="App-delete-all-icon">
+              <Image
+                width="36"
+                height="36"
+                src="/icons/general/trash-can.svg"
+                alt="trash"
+              />
+            </span>
             Delete All Items
           </button>
         </div>

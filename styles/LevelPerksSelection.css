@@ -1,26 +1,26 @@
 .LevelPerksSelection {
-  padding-left:5px;
+  padding-left: 5px;
 }
 .LevelPerksSelection input[type="checkbox"] {
-  font-size:1rem;
+  font-size: 1rem;
 }
-.LevelPerksSelection input{
-  user-select:none;
+.LevelPerksSelection input {
+  user-select: none;
   font-weight: bold;
   text-transform: capitalize;
-  padding:2px;
+  padding: 2px;
   border-radius: 3px;
-  border:none;
-  box-shadow:1px 1px 2px black;
-  background:lightblue;
+  border: none;
+  box-shadow: 1px 1px 2px black;
+  background: lightblue;
 }
 .LevelPerksSelection-perk-icon {
-  width:20px;
+  width: 25px;
 }
 .LevelPerksSelection-checkbox-label {
-  font-size:0.75rem;
+  font-size: 0.85rem;
 }
 .LevelPerksSelection-farming-level-input,
 .LevelPerksSelection-farming-level-label {
-  font-size:1rem;
+  font-size: 1rem;
 }

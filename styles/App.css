@@ -86,6 +86,10 @@ h1 i {
   color: fuchsia;
 }
 .App-delete-all {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
   background: indianred;
   color: white;
 }
@@ -95,7 +99,7 @@ h1 i {
   margin-bottom: 2px;
 }
 .App-perks-level-container {
-  display: inline-block;
+  display: grid;
   font-size: 0.7rem;
   min-width: 115px;
   background: rgb(245 222 179 / 40%);
@@ -104,7 +108,8 @@ h1 i {
   cursor: pointer;
 }
 .App-perks-level-farming {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: space-between;
   border-bottom: dotted 1px black;
 }

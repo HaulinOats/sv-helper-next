@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useContext } from "react";
 import { PerksContext } from "../../pages";
 import { ItemContext } from "../../pages/_app";
@@ -33,11 +34,14 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
         <td>
           {perksContext.hasRancher && (
             <div className="mb-1">
-              <img
-                className="ItemModal-perks-icon"
-                src="/icons/general/36px-Rancher.png"
-                alt="rancher"
-              />
+              <span className="ItemModal-perks-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/36px-Rancher.png"
+                  alt="rancher"
+                />
+              </span>
               <span className="ItemModal-perks-text">
                 Rancher{" "}
                 <i className="d-none d-lg-inline-block">
@@ -48,7 +52,9 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
           )}
           {perksContext.hasArtisan && (
             <div>
-              <img
+              <Image
+                width="36"
+                height="36"
                 className="ItemModal-perks-icon"
                 src="/icons/general/36px-Artisan.webp"
                 alt="artisan"
@@ -74,19 +80,21 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
             itemContext.itemRef[props.item.ingredientId].category ===
               "seeds") && (
             <a
-              className="d-table-cell"
               href={itemContext.itemRef[props.item.ingredientId].url}
               rel="noreferrer"
               target="_blank"
             >
-              <img
-                className="ItemModal-icon"
-                src={
-                  "/icons/crops/" +
-                  itemContext.itemRef[props.item.ingredientId].icon
-                }
-                alt="made-from"
-              />
+              <span className="ItemModal-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src={
+                    "/icons/crops/" +
+                    itemContext.itemRef[props.item.ingredientId].icon
+                  }
+                  alt="made-from"
+                />
+              </span>
               <span className="align-middle">
                 {itemContext.itemRef[props.item.ingredientId].name}
               </span>
@@ -96,19 +104,21 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
             itemContext.itemRef[props.item.ingredientId].category ===
               "animal_products") && (
             <a
-              className="d-table-cell"
               href={itemContext.itemRef[props.item.ingredientId].url}
               rel="noreferrer"
               target="_blank"
             >
-              <img
-                className="ItemModal-icon"
-                src={
-                  "/icons/goods/" +
-                  itemContext.itemRef[props.item.ingredientId].icon
-                }
-                alt="made-from"
-              />
+              <span className="ItemModal-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src={
+                    "/icons/goods/" +
+                    itemContext.itemRef[props.item.ingredientId].icon
+                  }
+                  alt="made-from"
+                />
+              </span>
               <span className="align-middle">
                 {itemContext.itemRef[props.item.ingredientId].name}
               </span>
@@ -123,20 +133,23 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
           {itemContext.itemRef[props.item.itemId].equipment.map(
             (equipment: string | number, idx: any) => {
               return (
-                <div key={equipment + idx} className="mb-2">
+                <div key={equipment + idx}>
                   <a
-                    className="d-table-cell"
                     href={itemContext.itemRef[equipment].url}
                     rel="noreferrer"
                     target="_blank"
                   >
-                    <img
-                      className="ItemModal-artisan-equipment-icon"
-                      src={
-                        "/icons/general/" + itemContext.itemRef[equipment].icon
-                      }
-                      alt="equipment"
-                    />
+                    <span className="ItemModal-artisan-equipment-icon">
+                      <Image
+                        width="36"
+                        height="48"
+                        src={
+                          "/icons/general/" +
+                          itemContext.itemRef[equipment].icon
+                        }
+                        alt="equipment"
+                      />
+                    </span>
                     <span className="align-middle">
                       {itemContext.itemRef[equipment].name}
                     </span>
@@ -153,13 +166,19 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
             <span>Base Crop Price:</span>
           </td>
           <td>
-            <img
-              className="ItemModal-gold-icon"
-              src="/icons/general/27px-Gold.png"
-              alt="gold"
-            />
-            <span>
-              {itemContext.itemRef[props.item.cropId].quality.normal.sellsFor}g
+            <span className="ItemModal-right-container">
+              <span className="ItemModal-gold-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/27px-Gold.png"
+                  alt="gold"
+                />
+              </span>
+              <span>
+                {itemContext.itemRef[props.item.cropId].quality.normal.sellsFor}
+                g
+              </span>
             </span>
           </td>
         </tr>
@@ -227,12 +246,17 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
           <span>Base Good Price:</span>
         </td>
         <td>
-          <img
-            className="ItemModal-gold-icon"
-            src="/icons/general/27px-Gold.png"
-            alt="gold"
-          />
-          <span>{props.item.basePrice.toFixed(2)}g</span>
+          <span className="ItemModal-right-container">
+            <span className="ItemModal-gold-icon">
+              <Image
+                width="36"
+                height="36"
+                src="/icons/general/27px-Gold.png"
+                alt="gold"
+              />
+            </span>
+            <span>{props.item.basePrice.toFixed(2)}g</span>
+          </span>
         </td>
       </tr>
       {!props.item.isCustom && (
@@ -263,12 +287,17 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
           </span>
         </td>
         <td>
-          <img
-            className="ItemModal-gold-icon"
-            src="/icons/general/27px-Gold.png"
-            alt="gold"
-          />
-          <span>{+props.item.sellPrice!.toFixed(2)}g</span>
+          <span className="ItemModal-right-container">
+            <span className="ItemModal-gold-icon">
+              <Image
+                width="36"
+                height="36"
+                src="/icons/general/27px-Gold.png"
+                alt="gold"
+              />
+            </span>
+            <span>{+props.item.sellPrice!.toFixed(2)}g</span>
+          </span>
         </td>
       </tr>
       <tr className="ItemModal-gold-per-day-container">
@@ -276,12 +305,17 @@ const GoodTable: React.FC<GoodTableProps> = (props) => {
           <span>Gold Per Day:</span>
         </td>
         <td>
-          <img
-            className="ItemModal-gold-icon"
-            src="/icons/general/27px-Gold.png"
-            alt="gold"
-          />
-          <span>{+props.item.avgGoldPerDay.toFixed(2)}g</span>
+          <span className="ItemModal-right-container">
+            <span className="ItemModal-gold-icon-large">
+              <Image
+                width="36"
+                height="36"
+                src="/icons/general/27px-Gold.png"
+                alt="gold"
+              />
+            </span>
+            <span>{+props.item.avgGoldPerDay.toFixed(2)}g</span>
+          </span>
         </td>
       </tr>
       {/* Warn users if certain Artisan item doesn't get Artisan buff */}

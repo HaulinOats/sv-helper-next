@@ -48,6 +48,9 @@ table th {
 .fs-1_3-rem {
   font-size: 1.3rem;
 }
+.ml-2 {
+  margin-left: 10px;
+}
 .sv-tilde {
   font-family: "Courier New", monospace;
   /* font-size: 1.2rem; */
@@ -72,8 +75,4 @@ table th {
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
-}
-.PerksContainer-perks-icon {
-  width: 17px;
-  height: 17px;
 }

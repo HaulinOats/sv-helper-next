@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { FC, useContext } from "react";
 import { ItemContext } from "../pages/_app";
 import { GoodCalculationItem } from "../types/GoodCalculationItem";
@@ -28,13 +29,16 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
                 &#9733;
               </span>
             )}
-            <img
-              className="GoodDetail-main-icon"
-              alt="crop-icon"
-              src={
-                "/icons/goods/" + itemContext.itemRef[props.item.itemId].icon
-              }
-            />
+            <span className="GoodDetail-main-icon">
+              <Image
+                width="36"
+                height="36"
+                alt="crop-icon"
+                src={
+                  "/icons/goods/" + itemContext.itemRef[props.item.itemId].icon
+                }
+              />
+            </span>
           </span>
           <span className="GoodDetail-main-title">
             {props.item.name
@@ -44,22 +48,28 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
         </span>
         <div>
           {props.item.isCask && (
-            <span className="d-inline-block">
-              <img
-                className="GoodDetail-status-icon"
-                src="/icons/cask.svg"
-                alt="cask"
-              />
-            </span>
+            <div>
+              <span className="GoodDetail-status-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/cask.svg"
+                  alt="cask"
+                />
+              </span>
+            </div>
           )}
           {props.item.isCustom && (
-            <span className="d-inline-block">
-              <img
-                className="GoodDetail-status-icon"
-                src="/icons/custom.svg"
-                alt="custom"
-              />
-            </span>
+            <div>
+              <span className="GoodDetail-status-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/custom.svg"
+                  alt="custom"
+                />
+              </span>
+            </div>
           )}
         </div>
       </div>
@@ -67,37 +77,41 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
         <div className="GoodDetail-main-container-left">
           <span className="GoodDetail-bottom-container-row">
             <span>Made From:</span>
-            <span>
-              {(itemContext.itemRef[props.item.ingredientId].category ===
-                "crops" ||
-                itemContext.itemRef[props.item.ingredientId].category ===
-                  "trees" ||
-                itemContext.itemRef[props.item.ingredientId].category ===
-                  "seeds") && (
-                <img
-                  className="ItemModal-icon"
+            {(itemContext.itemRef[props.item.ingredientId].category ===
+              "crops" ||
+              itemContext.itemRef[props.item.ingredientId].category ===
+                "trees" ||
+              itemContext.itemRef[props.item.ingredientId].category ===
+                "seeds") && (
+              <span className="GoodDetail-icon">
+                <Image
+                  width="36"
+                  height="36"
                   src={
                     "/icons/crops/" +
                     itemContext.itemRef[props.item.ingredientId].icon
                   }
                   alt="made-from"
                 />
-              )}
-              {(itemContext.itemRef[props.item.ingredientId].category ===
-                "goods" ||
-                itemContext.itemRef[props.item.ingredientId].category ===
-                  "animal_products") && (
-                <img
-                  className="ItemModal-icon"
+              </span>
+            )}
+            {(itemContext.itemRef[props.item.ingredientId].category ===
+              "goods" ||
+              itemContext.itemRef[props.item.ingredientId].category ===
+                "animal_products") && (
+              <span className="ItemModal-icon">
+                <Image
+                  width="36"
+                  height="36"
                   src={
                     "/icons/goods/" +
                     itemContext.itemRef[props.item.ingredientId].icon
                   }
                   alt="made-from"
                 />
-              )}
-              {!props.item.ingredientId && <span>N/A</span>}
-            </span>
+              </span>
+            )}
+            {!props.item.ingredientId && <span>N/A</span>}
           </span>
           <span className="GoodDetail-bottom-container-row">
             <span>Process Minutes:</span>
@@ -114,34 +128,43 @@ const GoodDetail: FC<GoodDetailProps> = (props) => {
         <div className="GoodDetail-main-container-right">
           <span className="GoodDetail-bottom-container-row">
             <span>Base Sell Price:</span>
-            <span>
-              <img
-                className="GoodDetail-daily-gold-icon"
-                src="/icons/general/27px-Gold.png"
-                alt="gold"
-              />
+            <span className="GoodDetail-right-grid">
+              <span className="GoodDetail-daily-gold-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/27px-Gold.png"
+                  alt="gold"
+                />
+              </span>
               {+props.item.basePrice!.toFixed(2)}g
             </span>
           </span>
           <span className="GoodDetail-bottom-container-row no-border">
             <span>Actual Sell Price:</span>
-            <span>
-              <img
-                className="GoodDetail-daily-gold-icon"
-                src="/icons/general/27px-Gold.png"
-                alt="gold"
-              />
+            <span className="GoodDetail-right-grid">
+              <span className="GoodDetail-daily-gold-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/27px-Gold.png"
+                  alt="gold"
+                />
+              </span>
               {+props.item.sellPrice!.toFixed(2)}g
             </span>
           </span>
           <span className="GoodDetail-gold-per-day">
             <span>Gold/Day:</span>
-            <span className="GoodDetail-gold-per-day-total">
-              <img
-                className="GoodDetail-daily-gold-icon"
-                src="/icons/general/27px-Gold.png"
-                alt="gold"
-              />
+            <span className="GoodDetail-right-grid">
+              <span className="GoodDetail-daily-gold-icon">
+                <Image
+                  width="36"
+                  height="36"
+                  src="/icons/general/27px-Gold.png"
+                  alt="gold"
+                />
+              </span>
               {props.item.avgGoldPerDay
                 ? +props.item.avgGoldPerDay.toFixed(2) + "g"
                 : "0"}

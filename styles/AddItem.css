@@ -1,48 +1,48 @@
 .AddItem {
-  position:fixed;
-  top:0%;
-  left:0;
-  height:100%;
-  width:100%;
+  position: fixed;
+  top: 0%;
+  left: 0;
+  height: 100%;
+  width: 100%;
   z-index: 6;
 }
 .AddItem h2 {
-  font-size:1.3rem;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 .AddItem-clickguard {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background: rgba(0,0,0, .4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
 }
 .AddItem-inner {
   max-height: 86%;
   overflow-y: auto;
   position: absolute;
   top: 10%;
-  left:2%;
+  left: 2%;
   padding: 5px 10px 10px 10px;
-  background: rgba(255,255,255, .9);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   border: 7px ridge;
   border-color: tan;
 }
 .AddItem input[type="checkbox"] {
-  font-size:1rem;
+  font-size: 1rem;
 }
 .AddItem-close-btn {
   position: absolute;
   top: -20px;
   right: 0px;
   font-size: 3rem;
-  cursor:pointer;
+  cursor: pointer;
 }
 .AddItem-prices-icon-container {
   position: relative;
-  display:inline-block;
+  display: inline-block;
   top: 65%;
   color: white;
   font-size: 1rem;
@@ -51,32 +51,32 @@
   position: absolute;
   top: 45%;
   color: white;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 .AddItem-prices-icon {
-  width:45%;
+  width: 45%;
 }
 .AddItem label {
-  margin-right:5px;
+  margin-right: 5px;
 }
 .AddItem select,
-.AddItem input{
-  user-select:none;
+.AddItem input {
+  user-select: none;
   font-weight: bold;
   text-transform: capitalize;
-  padding:2px;
+  padding: 2px;
   border-radius: 3px;
-  border:none;
-  box-shadow:1px 1px 2px black;
-  background:lightblue;
+  border: none;
+  box-shadow: 1px 1px 2px black;
+  background: lightblue;
 }
-.AddItem input[type='text'],
-.AddItem input[type='number'],
+.AddItem input[type="text"],
+.AddItem input[type="number"],
 .AddItem input[type="checkbox"]:not(:checked) {
-  background:white;
+  background: white;
 }
 .AddItem-checkbox-label {
-  font-size:0.75rem;
+  font-size: 0.75rem;
 }
 .AddItem-add-btn {
   background-color: burlywood;
@@ -93,32 +93,43 @@
   box-shadow: none;
 }
 .AddItem-perk-container {
-  font-size:0.6rem;
+  font-size: 0.6rem;
 }
 .AddItem-selected-item-title-container {
-  display:flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
+  justify-content: start;
+}
+.AddItem-selected-item-outer {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: solid 2px black;
 }
 .AddItem-bottom-container {
-  font-size:0.9rem;
+  font-size: 0.9rem;
   background: rgb(124 192 186 / 80%);
-  padding:8px;
-  margin-top:15px;
+  padding: 8px;
+  margin-top: 15px;
   border-radius: 7px;
 }
 .AddItem-custom-value-icon {
-  margin-right:5px;
+  margin-right: 5px;
 }
 .AddItem-custom-subtitle {
-  margin-left:5px;
+  margin-left: 5px;
   color: darkslategray;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 .AddItem-custom-img {
-  width:20px;
-  margin-left:5px;
+  width: 20px;
+  margin-left: 5px;
+  align-self: end;
 }
 .AddItem-greenhouse-img {
-  width:25px;
-  margin-left:5px;
+  width: 25px;
+  margin-left: 5px;
+}
+.AddItem-selected-icon {
+  width: 36px;
 }
