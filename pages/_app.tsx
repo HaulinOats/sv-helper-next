@@ -13,7 +13,6 @@ import "../styles/SortContainer.css";
 import "../styles/Tooltip.css";
 
 import type { AppProps } from "next/app";
-import Script from "next/script";
 import { ItemRef } from "../types/ItemRef.type";
 import { ItemData } from "../types/ItemData.type";
 import createItemObjects from "../util/item";

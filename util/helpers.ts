@@ -1,4 +1,5 @@
 export const seasonIcons: { [key: string]: string } = {
+  all: "All_Seasons_Icon.webp",
   spring: "36px-Spring.png",
   summer: "36px-Summer.png",
   fall: "36px-Fall.png",
