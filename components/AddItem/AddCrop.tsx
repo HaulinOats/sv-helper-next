@@ -3,6 +3,7 @@ import { ItemContext } from "../../pages/_app";
 import { Food } from "../../types/Food.type";
 import { seasonDropdownOptions } from "../../util/helpers";
 import Image from "next/image";
+import { blurInput, selectInput } from "../../util/events";
 
 interface AddCropState {
   itemId: string | undefined;
@@ -274,10 +275,6 @@ const AddCrop: React.FC<Props> = (props) => {
   };
 
   const addCrop = () => {
-    // let modifierActive = priceModifierIsActive;
-
-    // if(isCustom) modifierActive = true;
-
     props.addItem({
       addedAt: Date.now(),
       itemId: addCropState.itemId,
@@ -296,14 +293,6 @@ const AddCrop: React.FC<Props> = (props) => {
     resetCropState();
   };
 
-  const selectInput = (e: Event) => {
-    (e.target as HTMLInputElement).select();
-  };
-
-  const blurInput = (e: KeyboardEvent) => {
-    if (e.key === "Enter") (e.target as HTMLInputElement).blur();
-  };
-
   return (
     <div className="AddItem-category-container">
       <div className="form-group mt-2">
@@ -313,7 +302,7 @@ const AddCrop: React.FC<Props> = (props) => {
         <select
           className="AddItem-fertilizer-select"
           value={addCropState.fertilizerId}
-          onChange={(e) => fertilizerOnChange(e)}
+          onChange={fertilizerOnChange}
         >
           <option value="">None</option>
           {itemContext.itemData.fertilizers.map((fertilizer) => {
@@ -333,7 +322,7 @@ const AddCrop: React.FC<Props> = (props) => {
               <select
                 className="AddItem-fertilizer-vendor-select"
                 value={addCropState.fertilizerCost}
-                onChange={(e) => fertilizerVendorOnChange(e)}
+                onChange={fertilizerVendorOnChange}
               >
                 <option value="0">No Vendor</option>
                 {itemContext.itemRef[addCropState.fertilizerId].vendors!.map(
@@ -359,9 +348,9 @@ const AddCrop: React.FC<Props> = (props) => {
                 size={6}
                 step="1"
                 value={addCropState.fertilizerCost}
-                onClick={() => selectInput}
+                onClick={selectInput}
                 onChange={(e) => fertilizerCostOnChange(e, true)}
-                onKeyDown={() => blurInput}
+                onKeyDown={blurInput}
                 onBlur={(e) => fertilizerCostOnChange(e)}
               />
             </div>
@@ -375,7 +364,7 @@ const AddCrop: React.FC<Props> = (props) => {
         <select
           className="AddItem-farming-buff-select"
           value={addCropState.foodId}
-          onChange={(e) => changeFoodId(e)}
+          onChange={changeFoodId}
         >
           <option data-farmingbuff="0" value="">
             None
@@ -402,7 +391,7 @@ const AddCrop: React.FC<Props> = (props) => {
         <select
           className="AddItem-limit-season-select"
           value={addCropState.cropLimitToSeason}
-          onChange={(e) => cropLimitToSeasonOnChange(e)}
+          onChange={cropLimitToSeasonOnChange}
         >
           {seasonDropdownOptions.map((seasonObj) => {
             return (
@@ -420,7 +409,7 @@ const AddCrop: React.FC<Props> = (props) => {
         <select
           className="AddItem-crop-select"
           value={addCropState.itemId}
-          onChange={(e) => cropOnChange(e)}
+          onChange={cropOnChange}
         >
           <option value="">- Select A Crop -</option>
           {itemContext.itemData.crops.map((item) => {
@@ -464,7 +453,7 @@ const AddCrop: React.FC<Props> = (props) => {
                 <select
                   className="AddItem-vendor-select"
                   value={addCropState.seedCost}
-                  onChange={(e) => seedVendorOnChange(e)}
+                  onChange={seedVendorOnChange}
                 >
                   <option value="0">No Vendor</option>
                   {itemContext.itemRef[
@@ -490,9 +479,9 @@ const AddCrop: React.FC<Props> = (props) => {
                   size={6}
                   step="1"
                   value={addCropState.seedCost}
-                  onClick={() => selectInput}
+                  onClick={selectInput}
                   onChange={(e) => seedCostOnChange(e, true)}
-                  onKeyDown={() => blurInput}
+                  onKeyDown={blurInput}
                   onBlur={(e) => seedCostOnChange(e)}
                 />
               </span>
@@ -506,7 +495,7 @@ const AddCrop: React.FC<Props> = (props) => {
                     type="checkbox"
                     id="greenhouse-checkbox"
                     checked={addCropState.isGreenhouse}
-                    onChange={() => toggleIsGreenhouse()}
+                    onChange={toggleIsGreenhouse}
                   />
                   <div className="slider round"></div>
                 </label>
@@ -535,7 +524,7 @@ const AddCrop: React.FC<Props> = (props) => {
                   <select
                     className="AddItem-season-select"
                     value={addCropState.seasonStartIdx}
-                    onChange={(e) => seasonOnChange(e)}
+                    onChange={seasonOnChange}
                   >
                     {itemContext.itemRef[addCropState.itemId].seasons.map(
                       (season, idx) => {
@@ -557,8 +546,8 @@ const AddCrop: React.FC<Props> = (props) => {
                     max="28"
                     size={3}
                     value={addCropState.plantingDay}
-                    onClick={() => selectInput}
-                    onKeyDown={() => blurInput}
+                    onClick={selectInput}
+                    onKeyDown={blurInput}
                     onChange={(e) => plantingDayOnChange(e, true)}
                     onBlur={(e) => plantingDayOnChange(e)}
                   />
@@ -578,9 +567,9 @@ const AddCrop: React.FC<Props> = (props) => {
                   size={6}
                   step="1"
                   value={addCropState.customSellPrice}
-                  onClick={() => selectInput}
+                  onClick={selectInput}
                   onChange={(e) => props.customSellPriceOnChange(e, true)}
-                  onKeyDown={() => blurInput}
+                  onKeyDown={blurInput}
                   onBlur={(e) => props.customSellPriceOnChange(e)}
                 />
               </div>
@@ -588,7 +577,7 @@ const AddCrop: React.FC<Props> = (props) => {
             <button
               className="AddItem-add-btn btn my-2"
               type="submit"
-              onClick={() => addCrop()}
+              onClick={addCrop}
             >
               Add Item
             </button>

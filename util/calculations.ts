@@ -310,8 +310,8 @@ export const getGoodCalculations = (
 
   //if using cask
   if (item.quality) {
-    let qualityKey = Object.keys(item.quality)[0];
-    processingTime = itemRef[item.itemId].quality[qualityKey].processingTime;
+    let qualityKey = item.quality;
+    processingTime = itemRef[item.itemId].quality[qualityKey].processingTime!;
     sellPrice = itemRef[item.itemId].quality[qualityKey].sellsFor;
   }
 
@@ -352,7 +352,7 @@ export const getCheeseCalculations = (
   let sellPrice = basePrice;
   let priceMultiplier = 1;
   let avgGoldPerDay = 0;
-  let processingTime = itemRef[item.itemId].processingTime;
+  let processingTime = itemRef[item.itemId].processingTime || 0;
   let processingTimeInDays;
   let processingTimeInDaysModified;
   let startQuality = item.startQuality;
@@ -360,14 +360,12 @@ export const getCheeseCalculations = (
 
   //if using a cask
   if (endQuality) {
-    let endQualityKey = Object.keys(endQuality)[0];
-    sellPrice = itemRef[item.itemId].quality[endQualityKey].sellsFor;
+    sellPrice = itemRef[item.itemId].quality[endQuality].sellsFor;
     if (startQuality === "normal") {
-      processingTime =
-        itemRef[item.itemId].quality[endQualityKey].processingTime;
+      processingTime = itemRef[item.itemId].quality[endQuality].processingTime!;
     } else {
       processingTime =
-        itemRef[item.itemId].quality[endQualityKey].processingTime! -
+        itemRef[item.itemId].quality[endQuality].processingTime! -
         itemRef[item.itemId].quality[startQuality].processingTime!;
     }
   }
