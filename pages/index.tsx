@@ -8,19 +8,7 @@ import { CalculationItem } from "../types/CalculationItem.type";
 import NoItemsContainer from "../components/NoItemsContainer";
 import { getCalculations } from "../util/calculations";
 import { getItemFromStorage } from "../util/storage";
-
-interface AppState {
-  [key: string]: string | boolean | number | CalculationItem[];
-  selectedItemsArr: CalculationItem[];
-  addItemPanelIsShowing: boolean;
-  showInfoPanel: boolean;
-  sortByField: string;
-  farmingLevel: number;
-  hasTiller: boolean;
-  hasAgriculturist: boolean;
-  hasRancher: boolean;
-  hasArtisan: boolean;
-}
+import { AppState } from "../types/AppState.type";
 
 const perkDefaultValues = {
   farmingLevel: 0,
